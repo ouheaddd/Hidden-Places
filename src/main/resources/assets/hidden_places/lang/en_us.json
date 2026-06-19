@@ -1,4 +1,9 @@
 {
   "itemGroup.hidden_places": "Hidden Places",
-  "creative_tab.hidden_places.main": "Hidden Places"
+  "creative_tab.hidden_places.main": "Hidden Places",
+  "item.hidden_places.ancient_key": "Ancient Key",
+  "item.hidden_places.frostbound_key": "Frostbound Key",
+  "item.hidden_places.sunveil_key": "Sunveil Key",
+  "item.hidden_places.wildroot_key": "Wildroot Key",
+  "item.hidden_places.mossgate_key": "Mossgate Key"
 }

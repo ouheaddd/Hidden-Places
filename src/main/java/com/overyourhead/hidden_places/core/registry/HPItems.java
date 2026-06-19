@@ -11,14 +11,20 @@ import java.util.function.Supplier;
 public final class HPItems {
     public static final DeferredRegister.Items ITEMS = DeferredRegister.createItems(HiddenPlacesMod.MOD_ID);
 
-    /*
-     * Add normal items here. Everything registered in ITEMS is added to the
-     * Hidden Places creative tab automatically by HPCreativeTabs.
-     *
-     * Example:
-     * public static final DeferredItem<Item> ANCIENT_KEY =
-     *         registerSimpleItem("ancient_key");
-     */
+    public static final DeferredItem<Item> ANCIENT_KEY =
+            registerSimpleItem("ancient_key");
+
+    public static final DeferredItem<Item> FROSTBOUND_KEY =
+            registerSimpleItem("frostbound_key");
+
+    public static final DeferredItem<Item> SUNVEIL_KEY =
+            registerSimpleItem("sunveil_key");
+
+    public static final DeferredItem<Item> WILDROOT_KEY =
+            registerSimpleItem("wildroot_key");
+
+    public static final DeferredItem<Item> MOSSGATE_KEY =
+            registerSimpleItem("mossgate_key");
 
     private HPItems() {
     }
