@@ -18,6 +18,7 @@ import net.minecraft.world.item.component.ItemContainerContents;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntity;
+import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.entity.RandomizableContainerBlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import software.bernie.geckolib.animatable.GeoBlockEntity;
@@ -53,7 +54,11 @@ public class MossgateChestBlockEntity extends RandomizableContainerBlockEntity i
     private int transitionRenderTicks;
 
     public MossgateChestBlockEntity(BlockPos pos, BlockState blockState) {
-        super(HPBlockEntities.MOSSGATE_CHEST.get(), pos, blockState);
+        this(HPBlockEntities.MOSSGATE_CHEST.get(), pos, blockState);
+    }
+
+    protected MossgateChestBlockEntity(BlockEntityType<?> blockEntityType, BlockPos pos, BlockState blockState) {
+        super(blockEntityType, pos, blockState);
         this.lastOpenState = isOpen(blockState);
     }
 

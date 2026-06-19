@@ -1,6 +1,7 @@
 package com.overyourhead.hidden_places;
 
 import com.mojang.logging.LogUtils;
+import com.overyourhead.hidden_places.common.event.SealedSanctumProtectionEvents;
 import com.overyourhead.hidden_places.core.registry.HPBlockEntities;
 import com.overyourhead.hidden_places.core.registry.HPBlocks;
 import com.overyourhead.hidden_places.core.registry.HPCreativeTabs;
@@ -49,6 +50,7 @@ public class HiddenPlacesMod {
         HPCreativeTabs.register(modEventBus);
 
         NeoForge.EVENT_BUS.register(this);
+        NeoForge.EVENT_BUS.register(SealedSanctumProtectionEvents.class);
 
         modContainer.registerConfig(ModConfig.Type.COMMON, Config.SPEC);
     }

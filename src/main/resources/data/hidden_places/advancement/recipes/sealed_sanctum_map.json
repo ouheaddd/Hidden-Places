@@ -1,0 +1,75 @@
+{
+  "criteria": {
+    "has_frostbound_fragment": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": "hidden_places:frostbound_map_fragment"
+          }
+        ]
+      }
+    },
+    "has_sunveil_fragment": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": "hidden_places:sunveil_map_fragment"
+          }
+        ]
+      }
+    },
+    "has_wildroot_fragment": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": "hidden_places:wildroot_map_fragment"
+          }
+        ]
+      }
+    },
+    "has_mossgate_fragment": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": "hidden_places:mossgate_map_fragment"
+          }
+        ]
+      }
+    },
+    "has_compass": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": "minecraft:compass"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "hidden_places:sealed_sanctum_map"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_frostbound_fragment",
+      "has_sunveil_fragment",
+      "has_wildroot_fragment",
+      "has_mossgate_fragment",
+      "has_compass",
+      "has_the_recipe"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "hidden_places:sealed_sanctum_map"
+    ]
+  }
+}

@@ -1,0 +1,23 @@
+{
+  "display": {
+    "icon": {
+      "id": "hidden_places:ancient_key"
+    },
+    "title": {
+      "translate": "advancements.hidden_places.root.title"
+    },
+    "description": {
+      "translate": "advancements.hidden_places.root.description"
+    },
+    "background": "minecraft:textures/block/deepslate_tiles.png",
+    "frame": "task",
+    "show_toast": false,
+    "announce_to_chat": false,
+    "hidden": false
+  },
+  "criteria": {
+    "tick": {
+      "trigger": "minecraft:tick"
+    }
+  }
+}

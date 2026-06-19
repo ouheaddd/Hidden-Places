@@ -1,0 +1,14 @@
+{
+  "structures": [
+    {
+      "structure": "hidden_places:sealed_sanctum",
+      "weight": 1
+    }
+  ],
+  "placement": {
+    "type": "minecraft:random_spread",
+    "spacing": 400,
+    "separation": 280,
+    "salt": 847261039
+  }
+}

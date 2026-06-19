@@ -1,0 +1,33 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "pattern": [
+    "FPS",
+    "PCP",
+    "WPM"
+  ],
+  "key": {
+    "F": {
+      "item": "hidden_places:frostbound_map_fragment"
+    },
+    "S": {
+      "item": "hidden_places:sunveil_map_fragment"
+    },
+    "W": {
+      "item": "hidden_places:wildroot_map_fragment"
+    },
+    "M": {
+      "item": "hidden_places:mossgate_map_fragment"
+    },
+    "P": {
+      "item": "minecraft:paper"
+    },
+    "C": {
+      "item": "minecraft:compass"
+    }
+  },
+  "result": {
+    "id": "hidden_places:sealed_sanctum_map",
+    "count": 1
+  }
+}

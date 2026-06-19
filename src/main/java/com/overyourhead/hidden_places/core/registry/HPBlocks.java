@@ -1,7 +1,10 @@
 package com.overyourhead.hidden_places.core.registry;
 
 import com.overyourhead.hidden_places.HiddenPlacesMod;
+import com.overyourhead.hidden_places.common.block.FrostboundChestBlock;
 import com.overyourhead.hidden_places.common.block.MossgateChestBlock;
+import com.overyourhead.hidden_places.common.block.SunveilChestBlock;
+import com.overyourhead.hidden_places.common.block.WildrootChestBlock;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
@@ -18,11 +21,25 @@ import java.util.function.Supplier;
 public final class HPBlocks {
     public static final DeferredRegister.Blocks BLOCKS = DeferredRegister.createBlocks(HiddenPlacesMod.MOD_ID);
 
+    public static final DeferredBlock<FrostboundChestBlock> FROSTBOUND_CHEST = registerBlock(
+            "frostbound_chest",
+            () -> new FrostboundChestBlock(MossgateChestBlock.createProperties())
+    );
 
-    public static final DeferredBlock<MossgateChestBlock> MOSSGATE_CHEST =
-            registerBlock("mossgate_chest",
-                    () -> new MossgateChestBlock(MossgateChestBlock.createProperties())
-            );
+    public static final DeferredBlock<SunveilChestBlock> SUNVEIL_CHEST = registerBlock(
+            "sunveil_chest",
+            () -> new SunveilChestBlock(MossgateChestBlock.createProperties())
+    );
+
+    public static final DeferredBlock<WildrootChestBlock> WILDROOT_CHEST = registerBlock(
+            "wildroot_chest",
+            () -> new WildrootChestBlock(MossgateChestBlock.createProperties())
+    );
+
+    public static final DeferredBlock<MossgateChestBlock> MOSSGATE_CHEST = registerBlock(
+            "mossgate_chest",
+            () -> new MossgateChestBlock(MossgateChestBlock.createProperties())
+    );
 
     /*
      * Add blocks here. registerBlock(...) automatically creates a matching

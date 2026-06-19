@@ -1,0 +1,30 @@
+{
+  "parent": "hidden_places:hidden_places/root",
+  "display": {
+    "icon": {
+      "id": "hidden_places:sealed_sanctum_map"
+    },
+    "title": {
+      "translate": "advancements.hidden_places.crafted_sealed_sanctum_map.title"
+    },
+    "description": {
+      "translate": "advancements.hidden_places.crafted_sealed_sanctum_map.description"
+    },
+    "frame": "goal",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false
+  },
+  "criteria": {
+    "has_sealed_sanctum_map": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": "hidden_places:sealed_sanctum_map"
+          }
+        ]
+      }
+    }
+  }
+}

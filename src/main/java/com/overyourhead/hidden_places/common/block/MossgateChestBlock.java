@@ -11,6 +11,7 @@ import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.MenuProvider;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.component.ItemContainerContents;
 import net.minecraft.world.item.context.BlockPlaceContext;
@@ -97,8 +98,8 @@ public class MossgateChestBlock extends BaseEntityBlock {
             return InteractionResult.SUCCESS;
         }
 
-        if (!hasMossgateKeyInHand(player)) {
-            player.displayClientMessage(Component.translatable("message.hidden_places.mossgate_chest.locked"), true);
+        if (!hasRequiredKeyInHand(player)) {
+            player.displayClientMessage(this.getLockedMessage(), true);
             return InteractionResult.CONSUME;
         }
 
@@ -112,13 +113,22 @@ public class MossgateChestBlock extends BaseEntityBlock {
         return InteractionResult.CONSUME;
     }
 
-    private static boolean hasMossgateKeyInHand(Player player) {
+    protected Item getRequiredKey() {
+        return HPItems.MOSSGATE_KEY.get();
+    }
+
+    protected Component getLockedMessage() {
+        return Component.translatable("message.hidden_places.mossgate_chest.locked");
+    }
+
+    private boolean hasRequiredKeyInHand(Player player) {
         if (player.isCreative()) {
             return true;
         }
 
-        return player.getMainHandItem().is(HPItems.MOSSGATE_KEY.get())
-                || player.getOffhandItem().is(HPItems.MOSSGATE_KEY.get());
+        Item requiredKey = this.getRequiredKey();
+        return player.getMainHandItem().is(requiredKey)
+                || player.getOffhandItem().is(requiredKey);
     }
 
     @Override

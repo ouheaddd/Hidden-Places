@@ -1,7 +1,10 @@
 package com.overyourhead.hidden_places.core.registry;
 
 import com.overyourhead.hidden_places.HiddenPlacesMod;
+import com.overyourhead.hidden_places.common.block.entity.FrostboundChestBlockEntity;
 import com.overyourhead.hidden_places.common.block.entity.MossgateChestBlockEntity;
+import com.overyourhead.hidden_places.common.block.entity.SunveilChestBlockEntity;
+import com.overyourhead.hidden_places.common.block.entity.WildrootChestBlockEntity;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntity;
@@ -17,9 +20,17 @@ public final class HPBlockEntities {
     public static final DeferredRegister<BlockEntityType<?>> BLOCK_ENTITY_TYPES =
             DeferredRegister.create(Registries.BLOCK_ENTITY_TYPE, HiddenPlacesMod.MOD_ID);
 
-
     public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<MossgateChestBlockEntity>> MOSSGATE_CHEST =
             register("mossgate_chest", MossgateChestBlockEntity::new, HPBlocks.MOSSGATE_CHEST);
+
+    public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<FrostboundChestBlockEntity>> FROSTBOUND_CHEST =
+            register("frostbound_chest", FrostboundChestBlockEntity::new, HPBlocks.FROSTBOUND_CHEST);
+
+    public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<SunveilChestBlockEntity>> SUNVEIL_CHEST =
+            register("sunveil_chest", SunveilChestBlockEntity::new, HPBlocks.SUNVEIL_CHEST);
+
+    public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<WildrootChestBlockEntity>> WILDROOT_CHEST =
+            register("wildroot_chest", WildrootChestBlockEntity::new, HPBlocks.WILDROOT_CHEST);
 
     private HPBlockEntities() {
     }

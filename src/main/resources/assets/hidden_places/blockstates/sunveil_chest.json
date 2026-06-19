@@ -1,0 +1,12 @@
+{
+  "variants": {
+    "facing=north,open=false": { "model": "hidden_places:block/sunveil_chest" },
+    "facing=east,open=false": { "model": "hidden_places:block/sunveil_chest", "y": 90 },
+    "facing=south,open=false": { "model": "hidden_places:block/sunveil_chest", "y": 180 },
+    "facing=west,open=false": { "model": "hidden_places:block/sunveil_chest", "y": 270 },
+    "facing=north,open=true": { "model": "hidden_places:block/sunveil_chest" },
+    "facing=east,open=true": { "model": "hidden_places:block/sunveil_chest", "y": 90 },
+    "facing=south,open=true": { "model": "hidden_places:block/sunveil_chest", "y": 180 },
+    "facing=west,open=true": { "model": "hidden_places:block/sunveil_chest", "y": 270 }
+  }
+}

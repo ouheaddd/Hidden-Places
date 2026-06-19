@@ -1,6 +1,7 @@
 package com.overyourhead.hidden_places.core.registry;
 
 import com.overyourhead.hidden_places.HiddenPlacesMod;
+import com.overyourhead.hidden_places.common.item.SealedSanctumMapItem;
 import net.minecraft.world.item.Item;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.neoforge.registries.DeferredItem;
@@ -25,6 +26,21 @@ public final class HPItems {
 
     public static final DeferredItem<Item> MOSSGATE_KEY =
             registerSimpleItem("mossgate_key");
+
+    public static final DeferredItem<Item> FROSTBOUND_MAP_FRAGMENT =
+            registerSimpleItem("frostbound_map_fragment");
+
+    public static final DeferredItem<Item> SUNVEIL_MAP_FRAGMENT =
+            registerSimpleItem("sunveil_map_fragment");
+
+    public static final DeferredItem<Item> WILDROOT_MAP_FRAGMENT =
+            registerSimpleItem("wildroot_map_fragment");
+
+    public static final DeferredItem<Item> MOSSGATE_MAP_FRAGMENT =
+            registerSimpleItem("mossgate_map_fragment");
+
+    public static final DeferredItem<Item> SEALED_SANCTUM_MAP =
+            registerItem("sealed_sanctum_map", () -> new SealedSanctumMapItem(new Item.Properties()));
 
     private HPItems() {
     }

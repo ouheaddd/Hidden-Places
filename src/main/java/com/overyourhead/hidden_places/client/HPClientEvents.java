@@ -1,8 +1,14 @@
 package com.overyourhead.hidden_places.client;
 
 import com.overyourhead.hidden_places.HiddenPlacesMod;
+import com.overyourhead.hidden_places.client.renderer.FrostboundChestRenderer;
 import com.overyourhead.hidden_places.client.renderer.MossgateChestRenderer;
+import com.overyourhead.hidden_places.client.renderer.SunveilChestRenderer;
+import com.overyourhead.hidden_places.client.renderer.WildrootChestRenderer;
+import com.overyourhead.hidden_places.client.screen.FrostboundChestScreen;
 import com.overyourhead.hidden_places.client.screen.MossgateChestScreen;
+import com.overyourhead.hidden_places.client.screen.SunveilChestScreen;
+import com.overyourhead.hidden_places.client.screen.WildrootChestScreen;
 import com.overyourhead.hidden_places.core.registry.HPBlockEntities;
 import com.overyourhead.hidden_places.core.registry.HPMenuTypes;
 import net.neoforged.api.distmarker.Dist;
@@ -19,10 +25,16 @@ public final class HPClientEvents {
     @SubscribeEvent
     public static void registerMenuScreens(RegisterMenuScreensEvent event) {
         event.register(HPMenuTypes.MOSSGATE_CHEST.get(), MossgateChestScreen::new);
+        event.register(HPMenuTypes.FROSTBOUND_CHEST.get(), FrostboundChestScreen::new);
+        event.register(HPMenuTypes.SUNVEIL_CHEST.get(), SunveilChestScreen::new);
+        event.register(HPMenuTypes.WILDROOT_CHEST.get(), WildrootChestScreen::new);
     }
 
     @SubscribeEvent
     public static void registerRenderers(EntityRenderersEvent.RegisterRenderers event) {
         event.registerBlockEntityRenderer(HPBlockEntities.MOSSGATE_CHEST.get(), MossgateChestRenderer::new);
+        event.registerBlockEntityRenderer(HPBlockEntities.FROSTBOUND_CHEST.get(), FrostboundChestRenderer::new);
+        event.registerBlockEntityRenderer(HPBlockEntities.SUNVEIL_CHEST.get(), SunveilChestRenderer::new);
+        event.registerBlockEntityRenderer(HPBlockEntities.WILDROOT_CHEST.get(), WildrootChestRenderer::new);
     }
 }
