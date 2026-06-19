@@ -1,5 +1,4 @@
 {
-  "itemGroup.hidden_places": "Example Mod Tab",
-  "block.hidden_places.example_block": "Example Block",
-  "item.hidden_places.example_item": "Example Item"
+  "itemGroup.hidden_places": "Hidden Places",
+  "creative_tab.hidden_places.main": "Hidden Places"
 }
