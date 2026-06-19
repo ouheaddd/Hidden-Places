@@ -5,5 +5,8 @@
   "item.hidden_places.frostbound_key": "Frostbound Key",
   "item.hidden_places.sunveil_key": "Sunveil Key",
   "item.hidden_places.wildroot_key": "Wildroot Key",
-  "item.hidden_places.mossgate_key": "Mossgate Key"
+  "item.hidden_places.mossgate_key": "Mossgate Key",
+  "block.hidden_places.mossgate_chest": "Mossgate Chest",
+  "container.hidden_places.mossgate_chest": "Mossgate Chest",
+  "message.hidden_places.mossgate_chest.locked": "The chest is locked. You need a Mossgate Key."
 }

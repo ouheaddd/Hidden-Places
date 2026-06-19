@@ -7,6 +7,7 @@ import com.overyourhead.hidden_places.core.registry.HPCreativeTabs;
 import com.overyourhead.hidden_places.core.registry.HPEffects;
 import com.overyourhead.hidden_places.core.registry.HPEntities;
 import com.overyourhead.hidden_places.core.registry.HPItems;
+import com.overyourhead.hidden_places.core.registry.HPMenuTypes;
 import com.overyourhead.hidden_places.core.registry.HPParticleTypes;
 import com.overyourhead.hidden_places.core.registry.HPSoundEvents;
 import net.neoforged.bus.api.IEventBus;
@@ -44,6 +45,7 @@ public class HiddenPlacesMod {
         HPEffects.register(modEventBus);
         HPParticleTypes.register(modEventBus);
         HPSoundEvents.register(modEventBus);
+        HPMenuTypes.register(modEventBus);
         HPCreativeTabs.register(modEventBus);
 
         NeoForge.EVENT_BUS.register(this);

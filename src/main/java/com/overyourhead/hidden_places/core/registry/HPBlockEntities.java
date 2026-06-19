@@ -1,6 +1,7 @@
 package com.overyourhead.hidden_places.core.registry;
 
 import com.overyourhead.hidden_places.HiddenPlacesMod;
+import com.overyourhead.hidden_places.common.block.entity.MossgateChestBlockEntity;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntity;
@@ -15,6 +16,10 @@ import java.util.Arrays;
 public final class HPBlockEntities {
     public static final DeferredRegister<BlockEntityType<?>> BLOCK_ENTITY_TYPES =
             DeferredRegister.create(Registries.BLOCK_ENTITY_TYPE, HiddenPlacesMod.MOD_ID);
+
+
+    public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<MossgateChestBlockEntity>> MOSSGATE_CHEST =
+            register("mossgate_chest", MossgateChestBlockEntity::new, HPBlocks.MOSSGATE_CHEST);
 
     private HPBlockEntities() {
     }
