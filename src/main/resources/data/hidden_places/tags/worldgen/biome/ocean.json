@@ -1,6 +1,6 @@
 {
   "replace": false,
   "values": [
-    "#c:is_ocean"
+    "#c:is_deep_ocean"
   ]
 }
