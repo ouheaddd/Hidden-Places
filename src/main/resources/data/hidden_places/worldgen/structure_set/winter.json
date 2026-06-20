@@ -1,0 +1,14 @@
+{
+  "structures": [
+    {
+      "structure": "hidden_places:frostbound_igloo",
+      "weight": 1
+    }
+  ],
+  "placement": {
+    "type": "minecraft:random_spread",
+    "spacing": 90,
+    "separation": 40,
+    "salt": 537210941
+  }
+}
