@@ -4,12 +4,14 @@ import com.overyourhead.hidden_places.HiddenPlacesMod;
 import com.overyourhead.hidden_places.client.renderer.FrostboundChestRenderer;
 import com.overyourhead.hidden_places.client.renderer.MossgateChestRenderer;
 import com.overyourhead.hidden_places.client.renderer.SunveilChestRenderer;
+import com.overyourhead.hidden_places.client.renderer.TestWayfinderRenderer;
 import com.overyourhead.hidden_places.client.renderer.WildrootChestRenderer;
 import com.overyourhead.hidden_places.client.screen.FrostboundChestScreen;
 import com.overyourhead.hidden_places.client.screen.MossgateChestScreen;
 import com.overyourhead.hidden_places.client.screen.SunveilChestScreen;
 import com.overyourhead.hidden_places.client.screen.WildrootChestScreen;
 import com.overyourhead.hidden_places.core.registry.HPBlockEntities;
+import com.overyourhead.hidden_places.core.registry.HPEntities;
 import com.overyourhead.hidden_places.core.registry.HPMenuTypes;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.SubscribeEvent;
@@ -36,5 +38,7 @@ public final class HPClientEvents {
         event.registerBlockEntityRenderer(HPBlockEntities.FROSTBOUND_CHEST.get(), FrostboundChestRenderer::new);
         event.registerBlockEntityRenderer(HPBlockEntities.SUNVEIL_CHEST.get(), SunveilChestRenderer::new);
         event.registerBlockEntityRenderer(HPBlockEntities.WILDROOT_CHEST.get(), WildrootChestRenderer::new);
+
+        event.registerEntityRenderer(HPEntities.TEST_WAYFINDER.get(), TestWayfinderRenderer::new);
     }
 }

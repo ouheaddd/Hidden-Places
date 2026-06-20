@@ -2,6 +2,7 @@ package com.overyourhead.hidden_places;
 
 import com.mojang.logging.LogUtils;
 import com.overyourhead.hidden_places.common.event.SealedSanctumProtectionEvents;
+import com.overyourhead.hidden_places.common.network.HPNetwork;
 import com.overyourhead.hidden_places.core.registry.HPBlockEntities;
 import com.overyourhead.hidden_places.core.registry.HPBlocks;
 import com.overyourhead.hidden_places.core.registry.HPCreativeTabs;
@@ -36,6 +37,7 @@ public class HiddenPlacesMod {
 
     public HiddenPlacesMod(IEventBus modEventBus, ModContainer modContainer) {
         modEventBus.addListener(this::commonSetup);
+        modEventBus.addListener(HPNetwork::registerPayloads);
         modEventBus.addListener(HPEntities::registerAttributes);
         modEventBus.addListener(HPEntities::registerSpawnPlacements);
 

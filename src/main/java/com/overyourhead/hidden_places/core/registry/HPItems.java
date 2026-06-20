@@ -4,6 +4,7 @@ import com.overyourhead.hidden_places.HiddenPlacesMod;
 import com.overyourhead.hidden_places.common.item.SealedSanctumMapItem;
 import net.minecraft.world.item.Item;
 import net.neoforged.bus.api.IEventBus;
+import net.neoforged.neoforge.common.DeferredSpawnEggItem;
 import net.neoforged.neoforge.registries.DeferredItem;
 import net.neoforged.neoforge.registries.DeferredRegister;
 
@@ -41,6 +42,14 @@ public final class HPItems {
 
     public static final DeferredItem<Item> SEALED_SANCTUM_MAP =
             registerItem("sealed_sanctum_map", () -> new SealedSanctumMapItem(new Item.Properties()));
+
+    public static final DeferredItem<DeferredSpawnEggItem> TEST_WAYFINDER_SPAWN_EGG =
+            ITEMS.register("test_wayfinder_spawn_egg", () -> new DeferredSpawnEggItem(
+                    HPEntities.TEST_WAYFINDER,
+                    0x7B6A55,
+                    0x20BFEF,
+                    new Item.Properties()
+            ));
 
     private HPItems() {
     }
