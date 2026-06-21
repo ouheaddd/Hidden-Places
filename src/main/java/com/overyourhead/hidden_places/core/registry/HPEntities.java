@@ -1,6 +1,7 @@
 package com.overyourhead.hidden_places.core.registry;
 
 import com.overyourhead.hidden_places.HiddenPlacesMod;
+import com.overyourhead.hidden_places.common.entity.MossgateWayfinderEntity;
 import com.overyourhead.hidden_places.common.entity.TestWayfinderEntity;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.world.entity.EntityType;
@@ -24,6 +25,15 @@ public final class HPEntities {
                     .updateInterval(3)
                     .build("test_wayfinder"));
 
+    public static final DeferredHolder<EntityType<?>, EntityType<MossgateWayfinderEntity>> MOSSGATE_WAYFINDER =
+            ENTITY_TYPES.register("mossgate_wayfinder", () -> EntityType.Builder
+                    .of(MossgateWayfinderEntity::new, MobCategory.CREATURE)
+                    .sized(0.6F, 1.95F)
+                    .eyeHeight(1.74F)
+                    .clientTrackingRange(8)
+                    .updateInterval(3)
+                    .build("mossgate_wayfinder"));
+
     private HPEntities() {
     }
 
@@ -33,6 +43,7 @@ public final class HPEntities {
 
     public static void registerAttributes(EntityAttributeCreationEvent event) {
         event.put(TEST_WAYFINDER.get(), TestWayfinderEntity.createAttributes().build());
+        event.put(MOSSGATE_WAYFINDER.get(), MossgateWayfinderEntity.createAttributes().build());
     }
 
     public static void registerSpawnPlacements(RegisterSpawnPlacementsEvent event) {

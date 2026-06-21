@@ -1,7 +1,7 @@
 package com.overyourhead.hidden_places.common.entity;
 
 import com.overyourhead.hidden_places.common.network.OpenWayfinderDialoguePayload;
-import com.overyourhead.hidden_places.common.npc.WayfinderDialogueStage;
+import com.overyourhead.hidden_places.common.npc.WayfinderDialogueNode;
 import com.overyourhead.hidden_places.common.npc.WayfinderProfile;
 import com.overyourhead.hidden_places.common.npc.WayfinderTradeOffer;
 import com.overyourhead.hidden_places.core.registry.HPItems;
@@ -46,13 +46,6 @@ import java.util.Set;
 import java.util.UUID;
 
 public class TestWayfinderEntity extends Monster implements GeoEntity {
-    public static final int DIALOGUE_STAGE_INTRO = WayfinderDialogueStage.INTRO.id();
-    public static final int DIALOGUE_STAGE_WHO = WayfinderDialogueStage.WHO.id();
-    public static final int DIALOGUE_STAGE_SANCTUM = WayfinderDialogueStage.SANCTUM.id();
-    public static final int DIALOGUE_STAGE_TRADE = WayfinderDialogueStage.TRADE.id();
-    public static final int DIALOGUE_STAGE_HOSTILE_DEAD_END = WayfinderDialogueStage.HOSTILE_DEAD_END.id();
-    public static final int DIALOGUE_STAGE_TRADE_COMPLETED = WayfinderDialogueStage.TRADE_COMPLETED.id();
-
     private static final EntityDataAccessor<Boolean> HOSTILE = SynchedEntityData.defineId(
             TestWayfinderEntity.class,
             EntityDataSerializers.BOOLEAN
@@ -63,16 +56,11 @@ public class TestWayfinderEntity extends Monster implements GeoEntity {
             EntityDataSerializers.BOOLEAN
     );
 
-    private static final EntityDataAccessor<Integer> DIALOGUE_STAGE = SynchedEntityData.defineId(
-            TestWayfinderEntity.class,
-            EntityDataSerializers.INT
-    );
-
     private static final RawAnimation IDLE = RawAnimation.begin().thenLoop("idle");
     private static final RawAnimation WALK = RawAnimation.begin().thenLoop("walk");
 
     private final AnimatableInstanceCache animatableInstanceCache = GeckoLibUtil.createInstanceCache(this);
-    private final Map<UUID, WayfinderDialogueStage> playerDialogueStages = new HashMap<>();
+    private final Map<UUID, String> playerDialogueNodes = new HashMap<>();
     private final Set<UUID> tradedPlayers = new HashSet<>();
     private final Set<UUID> activeTalkers = new HashSet<>();
 
@@ -105,7 +93,6 @@ public class TestWayfinderEntity extends Monster implements GeoEntity {
         super.defineSynchedData(builder);
         builder.define(HOSTILE, false);
         builder.define(IN_CONVERSATION, false);
-        builder.define(DIALOGUE_STAGE, this.getProfile().defaultDialogueStage().id());
     }
 
     public WayfinderProfile getProfile() {
@@ -162,29 +149,26 @@ public class TestWayfinderEntity extends Monster implements GeoEntity {
         this.entityData.set(IN_CONVERSATION, false);
     }
 
-    public int getDialogueStage() {
-        return this.entityData.get(DIALOGUE_STAGE);
+    public String getDialogueNodeId(Player player) {
+        if (this.hasPlayerTraded(player)) {
+            return this.getProfile().completedNodeId();
+        }
+
+        String nodeId = this.playerDialogueNodes.getOrDefault(player.getUUID(), this.getProfile().defaultNodeId());
+        if (!this.getProfile().hasDialogueNode(nodeId)) {
+            return this.getProfile().defaultNodeId();
+        }
+
+        return nodeId;
     }
 
-    public WayfinderDialogueStage getDialogueStageType() {
-        return WayfinderDialogueStage.byId(this.getDialogueStage());
+    public WayfinderDialogueNode getDialogueNode(Player player) {
+        return this.getProfile().dialogueNode(this.getDialogueNodeId(player));
     }
 
-    public WayfinderDialogueStage getDialogueStage(Player player) {
-        return this.playerDialogueStages.getOrDefault(player.getUUID(), this.getProfile().defaultDialogueStage());
-    }
-
-    public void setDialogueStage(int dialogueStage) {
-        this.setDialogueStage(WayfinderDialogueStage.byId(dialogueStage));
-    }
-
-    public void setDialogueStage(WayfinderDialogueStage dialogueStage) {
-        this.entityData.set(DIALOGUE_STAGE, dialogueStage.id());
-    }
-
-    public void setDialogueStage(Player player, WayfinderDialogueStage dialogueStage) {
-        this.playerDialogueStages.put(player.getUUID(), dialogueStage);
-        this.entityData.set(DIALOGUE_STAGE, dialogueStage.id());
+    public void setDialogueNode(Player player, String nodeId) {
+        String safeNodeId = this.getProfile().hasDialogueNode(nodeId) ? nodeId : this.getProfile().defaultNodeId();
+        this.playerDialogueNodes.put(player.getUUID(), safeNodeId);
     }
 
     public boolean hasTrade() {
@@ -205,7 +189,7 @@ public class TestWayfinderEntity extends Monster implements GeoEntity {
 
     public void markPlayerTraded(Player player) {
         this.tradedPlayers.add(player.getUUID());
-        this.setDialogueStage(player, WayfinderDialogueStage.TRADE_COMPLETED);
+        this.setDialogueNode(player, this.getProfile().completedNodeId());
     }
 
     public void provoke(Player player) {
@@ -214,7 +198,9 @@ public class TestWayfinderEntity extends Monster implements GeoEntity {
         }
 
         this.clearConversations();
-        this.setDialogueStage(player, WayfinderDialogueStage.HOSTILE_DEAD_END);
+        if (this.getProfile().hostileNodeId() != null) {
+            this.setDialogueNode(player, this.getProfile().hostileNodeId());
+        }
         this.setHostile(true);
         this.setTarget(player);
         player.displayClientMessage(Component.translatable("message.hidden_places.test_wayfinder.hostile"), true);
@@ -294,12 +280,12 @@ public class TestWayfinderEntity extends Monster implements GeoEntity {
             if (!this.hasPlayerTraded(player)) {
                 this.provoke(player);
             } else {
-                this.setDialogueStage(player, WayfinderDialogueStage.TRADE_COMPLETED);
+                this.setDialogueNode(player, this.getProfile().completedNodeId());
                 this.startConversation(player);
                 if (player instanceof ServerPlayer serverPlayer) {
                     PacketDistributor.sendToPlayer(serverPlayer, new OpenWayfinderDialoguePayload(
                             this.getId(),
-                            WayfinderDialogueStage.TRADE_COMPLETED.id()
+                            this.getProfile().completedNodeId()
                     ));
                 }
             }
@@ -307,14 +293,14 @@ public class TestWayfinderEntity extends Monster implements GeoEntity {
         }
 
         if (this.hasPlayerTraded(player)) {
-            this.setDialogueStage(player, WayfinderDialogueStage.TRADE_COMPLETED);
+            this.setDialogueNode(player, this.getProfile().completedNodeId());
         }
 
         this.startConversation(player);
         if (player instanceof ServerPlayer serverPlayer) {
             PacketDistributor.sendToPlayer(serverPlayer, new OpenWayfinderDialoguePayload(
                     this.getId(),
-                    this.getDialogueStage(player).id()
+                    this.getDialogueNodeId(player)
             ));
         }
         return InteractionResult.CONSUME;
@@ -329,16 +315,15 @@ public class TestWayfinderEntity extends Monster implements GeoEntity {
     public void addAdditionalSaveData(CompoundTag tag) {
         super.addAdditionalSaveData(tag);
         tag.putBoolean("Hostile", this.isHostile());
-        tag.putInt("DialogueStage", this.getDialogueStage());
 
-        ListTag stages = new ListTag();
-        this.playerDialogueStages.forEach((playerId, stage) -> {
+        ListTag nodes = new ListTag();
+        this.playerDialogueNodes.forEach((playerId, nodeId) -> {
             CompoundTag entry = new CompoundTag();
             entry.putUUID("Player", playerId);
-            entry.putInt("Stage", stage.id());
-            stages.add(entry);
+            entry.putString("Node", nodeId);
+            nodes.add(entry);
         });
-        tag.put("PlayerDialogueStages", stages);
+        tag.put("PlayerDialogueNodes", nodes);
 
         ListTag trades = new ListTag();
         for (UUID playerId : this.tradedPlayers) {
@@ -353,20 +338,26 @@ public class TestWayfinderEntity extends Monster implements GeoEntity {
     public void readAdditionalSaveData(CompoundTag tag) {
         super.readAdditionalSaveData(tag);
         this.setHostile(tag.getBoolean("Hostile"));
-        if (tag.contains("DialogueStage")) {
-            this.setDialogueStage(tag.getInt("DialogueStage"));
-        } else {
-            this.setDialogueStage(this.getProfile().defaultDialogueStage());
+
+        this.playerDialogueNodes.clear();
+        ListTag nodes = tag.getList("PlayerDialogueNodes", Tag.TAG_COMPOUND);
+        for (int i = 0; i < nodes.size(); i++) {
+            CompoundTag entry = nodes.getCompound(i);
+            if (entry.hasUUID("Player")) {
+                String nodeId = entry.getString("Node");
+                if (this.getProfile().hasDialogueNode(nodeId)) {
+                    this.playerDialogueNodes.put(entry.getUUID("Player"), nodeId);
+                }
+            }
         }
 
-        this.playerDialogueStages.clear();
-        ListTag stages = tag.getList("PlayerDialogueStages", Tag.TAG_COMPOUND);
-        for (int i = 0; i < stages.size(); i++) {
-            CompoundTag entry = stages.getCompound(i);
+        ListTag legacyStages = tag.getList("PlayerDialogueStages", Tag.TAG_COMPOUND);
+        for (int i = 0; i < legacyStages.size(); i++) {
+            CompoundTag entry = legacyStages.getCompound(i);
             if (entry.hasUUID("Player")) {
-                this.playerDialogueStages.put(
+                this.playerDialogueNodes.put(
                         entry.getUUID("Player"),
-                        WayfinderDialogueStage.byId(entry.getInt("Stage"))
+                        this.getProfile().nodeIdFromLegacyStage(entry.getInt("Stage"))
                 );
             }
         }
@@ -385,11 +376,12 @@ public class TestWayfinderEntity extends Monster implements GeoEntity {
 
     @Override
     public void registerControllers(AnimatableManager.ControllerRegistrar controllers) {
-        controllers.add(new AnimationController<>(this, "test_wayfinder_controller", 5, this::handleAnimations));
+        controllers.add(new AnimationController<>(this, "wayfinder_controller", 5, this::handleAnimations));
     }
 
     private <E extends TestWayfinderEntity> PlayState handleAnimations(AnimationState<E> animationState) {
-        return animationState.setAndContinue(animationState.isMoving() ? WALK : IDLE);
+        boolean moving = this.getDeltaMovement().horizontalDistanceSqr() > 1.0E-6D || animationState.isMoving();
+        return animationState.setAndContinue(moving ? WALK : IDLE);
     }
 
     @Override

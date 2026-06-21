@@ -17,6 +17,14 @@ public enum WayfinderTradeOffer {
             () -> HPItems.MOSSGATE_KEY.get(),
             1,
             "mossgate_key"
+    ),
+    MOSSGATE_KEY_FOR_TORCHFLOWER(
+            1,
+            () -> Items.TORCHFLOWER,
+            1,
+            () -> HPItems.MOSSGATE_KEY.get(),
+            1,
+            "mossgate_key_for_torchflower"
     );
 
     private final int id;

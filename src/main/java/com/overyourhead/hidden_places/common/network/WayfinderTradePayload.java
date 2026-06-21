@@ -17,6 +17,7 @@ import net.neoforged.neoforge.network.handling.IPayloadContext;
 
 public record WayfinderTradePayload(int entityId, int offerId) implements CustomPacketPayload {
     public static final int OFFER_MOSSGATE_KEY = WayfinderTradeOffer.MOSSGATE_KEY_FOR_EMERALD.id();
+    public static final int OFFER_MOSSGATE_KEY_FOR_TORCHFLOWER = WayfinderTradeOffer.MOSSGATE_KEY_FOR_TORCHFLOWER.id();
 
     public static final Type<WayfinderTradePayload> TYPE = new Type<>(
             ResourceLocation.fromNamespaceAndPath(HiddenPlacesMod.MOD_ID, "wayfinder_trade")
@@ -58,7 +59,7 @@ public record WayfinderTradePayload(int entityId, int offerId) implements Custom
 
     private static void trade(ServerPlayer player, TestWayfinderEntity wayfinder, WayfinderTradeOffer offer) {
         if (wayfinder.hasPlayerTraded(player)) {
-            wayfinder.setDialogueStage(player, com.overyourhead.hidden_places.common.npc.WayfinderDialogueStage.TRADE_COMPLETED);
+            wayfinder.setDialogueNode(player, wayfinder.getProfile().completedNodeId());
             sendResult(player, wayfinder, WayfinderTradeResultPayload.ALREADY_TRADED);
             return;
         }

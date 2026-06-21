@@ -3,6 +3,7 @@ package com.overyourhead.hidden_places.client;
 import com.overyourhead.hidden_places.HiddenPlacesMod;
 import com.overyourhead.hidden_places.client.renderer.FrostboundChestRenderer;
 import com.overyourhead.hidden_places.client.renderer.MossgateChestRenderer;
+import com.overyourhead.hidden_places.client.renderer.MossgateWayfinderRenderer;
 import com.overyourhead.hidden_places.client.renderer.SunveilChestRenderer;
 import com.overyourhead.hidden_places.client.renderer.TestWayfinderRenderer;
 import com.overyourhead.hidden_places.client.renderer.WildrootChestRenderer;
@@ -40,5 +41,6 @@ public final class HPClientEvents {
         event.registerBlockEntityRenderer(HPBlockEntities.WILDROOT_CHEST.get(), WildrootChestRenderer::new);
 
         event.registerEntityRenderer(HPEntities.TEST_WAYFINDER.get(), TestWayfinderRenderer::new);
+        event.registerEntityRenderer(HPEntities.MOSSGATE_WAYFINDER.get(), MossgateWayfinderRenderer::new);
     }
 }

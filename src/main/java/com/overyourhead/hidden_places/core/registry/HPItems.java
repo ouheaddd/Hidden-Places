@@ -51,6 +51,14 @@ public final class HPItems {
                     new Item.Properties()
             ));
 
+    public static final DeferredItem<DeferredSpawnEggItem> MOSSGATE_WAYFINDER_SPAWN_EGG =
+            ITEMS.register("mossgate_wayfinder_spawn_egg", () -> new DeferredSpawnEggItem(
+                    HPEntities.MOSSGATE_WAYFINDER,
+                    0x2F4A2D,
+                    0xD9C89A,
+                    new Item.Properties()
+            ));
+
     private HPItems() {
     }
 

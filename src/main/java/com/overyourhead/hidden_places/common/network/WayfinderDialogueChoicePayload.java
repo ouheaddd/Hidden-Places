@@ -2,7 +2,9 @@ package com.overyourhead.hidden_places.common.network;
 
 import com.overyourhead.hidden_places.HiddenPlacesMod;
 import com.overyourhead.hidden_places.common.entity.TestWayfinderEntity;
-import com.overyourhead.hidden_places.common.npc.WayfinderDialogueStage;
+import com.overyourhead.hidden_places.common.npc.WayfinderDialogueAction;
+import com.overyourhead.hidden_places.common.npc.WayfinderDialogueChoice;
+import com.overyourhead.hidden_places.common.npc.WayfinderDialogueNode;
 import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.codec.ByteBufCodecs;
 import net.minecraft.network.codec.StreamCodec;
@@ -13,15 +15,7 @@ import net.minecraft.world.entity.Entity;
 import net.neoforged.neoforge.network.handling.IPayloadContext;
 
 public record WayfinderDialogueChoicePayload(int entityId, int choiceId) implements CustomPacketPayload {
-    public static final int CHOICE_OPEN_TRADE = 1;
-    public static final int CHOICE_TROUBLE = 2;
-    public static final int CHOICE_STAGE_INTRO = 10;
-    public static final int CHOICE_STAGE_WHO = 11;
-    public static final int CHOICE_STAGE_SANCTUM = 12;
-    public static final int CHOICE_STAGE_TRADE = 13;
-    public static final int CHOICE_STAGE_HOSTILE_DEAD_END = 14;
-    public static final int CHOICE_STAGE_TRADE_COMPLETED = 15;
-    public static final int CHOICE_CLOSE = 20;
+    public static final int CHOICE_CLOSE = -1;
 
     public static final Type<WayfinderDialogueChoicePayload> TYPE = new Type<>(
             ResourceLocation.fromNamespaceAndPath(HiddenPlacesMod.MOD_ID, "wayfinder_dialogue_choice")
@@ -56,58 +50,57 @@ public record WayfinderDialogueChoicePayload(int entityId, int choiceId) impleme
                 return;
             }
 
-            switch (payload.choiceId()) {
-                case CHOICE_OPEN_TRADE -> {
-                    WayfinderDialogueStage currentStage = wayfinder.getDialogueStage(player);
-                    if (!wayfinder.isHostile()
-                            && wayfinder.hasTrade()
-                            && currentStage != WayfinderDialogueStage.TRADE_COMPLETED
-                            && currentStage != WayfinderDialogueStage.HOSTILE_DEAD_END) {
-                        wayfinder.setDialogueStage(player, WayfinderDialogueStage.TRADE);
-                        wayfinder.startConversation(player);
-                    }
-                }
-                case CHOICE_TROUBLE -> wayfinder.provoke(player);
-                case CHOICE_STAGE_INTRO -> setStage(player, wayfinder, WayfinderDialogueStage.INTRO);
-                case CHOICE_STAGE_WHO -> setStage(player, wayfinder, WayfinderDialogueStage.WHO);
-                case CHOICE_STAGE_SANCTUM -> setStage(player, wayfinder, WayfinderDialogueStage.SANCTUM);
-                case CHOICE_STAGE_TRADE -> setStage(player, wayfinder, WayfinderDialogueStage.TRADE);
-                case CHOICE_STAGE_HOSTILE_DEAD_END -> setStage(player, wayfinder, WayfinderDialogueStage.HOSTILE_DEAD_END);
-                case CHOICE_STAGE_TRADE_COMPLETED -> setStage(player, wayfinder, WayfinderDialogueStage.TRADE_COMPLETED);
-                case CHOICE_CLOSE -> wayfinder.stopConversation(player);
-                default -> {
-                }
+            if (payload.choiceId() == CHOICE_CLOSE) {
+                wayfinder.stopConversation(player);
+                return;
             }
+
+            if (wayfinder.isHostile()) {
+                return;
+            }
+
+            WayfinderDialogueNode node = wayfinder.getDialogueNode(player);
+            if (payload.choiceId() < 0 || payload.choiceId() >= node.choices().size()) {
+                return;
+            }
+
+            WayfinderDialogueChoice choice = node.choices().get(payload.choiceId());
+            applyChoice(player, wayfinder, choice);
         });
     }
 
-    private static void setStage(ServerPlayer player, TestWayfinderEntity wayfinder, WayfinderDialogueStage stage) {
-        if (wayfinder.isHostile()) {
+    private static void applyChoice(ServerPlayer player, TestWayfinderEntity wayfinder, WayfinderDialogueChoice choice) {
+        WayfinderDialogueAction action = choice.action();
+
+        if (action == WayfinderDialogueAction.GOTO_NODE && choice.targetNodeId() != null) {
+            wayfinder.setDialogueNode(player, choice.targetNodeId());
+            wayfinder.startConversation(player);
             return;
         }
 
-        WayfinderDialogueStage currentStage = wayfinder.getDialogueStage(player);
-        if (!canMoveToStage(currentStage, stage)) {
+        if (action == WayfinderDialogueAction.OPEN_TRADE) {
+            if (wayfinder.hasTrade() && !wayfinder.hasPlayerTraded(player)) {
+                if (wayfinder.getProfile().tradeNodeId() != null) {
+                    wayfinder.setDialogueNode(player, wayfinder.getProfile().tradeNodeId());
+                }
+                wayfinder.startConversation(player);
+            }
             return;
         }
 
-        wayfinder.setDialogueStage(player, stage);
-        wayfinder.startConversation(player);
-    }
-
-    private static boolean canMoveToStage(WayfinderDialogueStage currentStage, WayfinderDialogueStage requestedStage) {
-        if (currentStage == WayfinderDialogueStage.TRADE_COMPLETED) {
-            return requestedStage == WayfinderDialogueStage.TRADE_COMPLETED;
+        if (action == WayfinderDialogueAction.START_FIGHT) {
+            wayfinder.provoke(player);
+            return;
         }
 
-        if (currentStage == WayfinderDialogueStage.HOSTILE_DEAD_END) {
-            return requestedStage == WayfinderDialogueStage.HOSTILE_DEAD_END;
+        if (action == WayfinderDialogueAction.COMPLETE) {
+            wayfinder.setDialogueNode(player, wayfinder.getProfile().completedNodeId());
+            wayfinder.startConversation(player);
+            return;
         }
 
-        if (requestedStage == WayfinderDialogueStage.INTRO && currentStage != WayfinderDialogueStage.INTRO) {
-            return false;
+        if (action == WayfinderDialogueAction.CLOSE) {
+            wayfinder.stopConversation(player);
         }
-
-        return true;
     }
 }

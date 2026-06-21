@@ -4,7 +4,9 @@ import com.overyourhead.hidden_places.HiddenPlacesMod;
 import com.overyourhead.hidden_places.client.screen.widget.WayfinderButton;
 import com.overyourhead.hidden_places.common.entity.TestWayfinderEntity;
 import com.overyourhead.hidden_places.common.network.WayfinderDialogueChoicePayload;
-import com.overyourhead.hidden_places.common.npc.WayfinderDialogueStage;
+import com.overyourhead.hidden_places.common.npc.WayfinderDialogueAction;
+import com.overyourhead.hidden_places.common.npc.WayfinderDialogueChoice;
+import com.overyourhead.hidden_places.common.npc.WayfinderDialogueNode;
 import com.overyourhead.hidden_places.common.npc.WayfinderProfile;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
@@ -27,102 +29,74 @@ public class TestWayfinderDialogueScreen extends Screen {
 
     private final int entityId;
     private final WayfinderProfile profile;
-    private WayfinderDialogueStage dialogueStage;
+    private String nodeId;
+    private WayfinderDialogueNode node;
     private Component bodyText;
     private boolean suppressClosePacket;
 
     public TestWayfinderDialogueScreen(TestWayfinderEntity wayfinder) {
-        this(wayfinder, wayfinder.getDialogueStageType());
+        this(wayfinder, wayfinder.getProfile().defaultNodeId());
     }
 
-    public TestWayfinderDialogueScreen(TestWayfinderEntity wayfinder, WayfinderDialogueStage initialStage) {
-        super(Component.translatable("screen.hidden_places.test_wayfinder.title"));
+    public TestWayfinderDialogueScreen(TestWayfinderEntity wayfinder, String initialNodeId) {
+        super(Component.translatable("screen.hidden_places." + wayfinder.getProfile().translationKey() + ".title"));
         this.entityId = wayfinder.getId();
         this.profile = wayfinder.getProfile();
-        this.dialogueStage = initialStage;
-        this.bodyText = this.bodyForStage(this.dialogueStage);
+        this.nodeId = this.profile.hasDialogueNode(initialNodeId) ? initialNodeId : this.profile.defaultNodeId();
+        this.node = this.profile.dialogueNode(this.nodeId);
+        this.bodyText = this.bodyForNode(this.node);
     }
 
     @Override
     protected void init() {
-        this.showStage(this.dialogueStage, false);
+        this.showNode(this.nodeId);
     }
 
-    private void showStage(WayfinderDialogueStage stage, boolean notifyServer) {
+    private void showNode(String newNodeId) {
         this.clearWidgets();
-        this.dialogueStage = stage;
-        this.bodyText = this.bodyForStage(stage);
+        this.nodeId = this.profile.hasDialogueNode(newNodeId) ? newNodeId : this.profile.defaultNodeId();
+        this.node = this.profile.dialogueNode(this.nodeId);
+        this.bodyText = this.bodyForNode(this.node);
 
-        if (notifyServer) {
-            this.sendStageToServer(stage);
-        }
-
-        switch (stage) {
-            case WHO -> this.showWhoOptions();
-            case SANCTUM -> this.showSanctumOptions();
-            case TRADE -> this.showTradeOptions();
-            case HOSTILE_DEAD_END -> this.showHostileOptions();
-            case TRADE_COMPLETED -> this.showTradeCompletedOptions();
-            case INTRO -> this.showIntroOptions();
+        int index = 0;
+        for (WayfinderDialogueChoice choice : this.node.choices()) {
+            final int choiceIndex = index;
+            this.addDialogueButton(index, Component.translatable(choice.textTranslationKey(this.profile)), button -> this.choose(choiceIndex));
+            index++;
         }
     }
 
-    private Component bodyForStage(WayfinderDialogueStage stage) {
-        return Component.translatable(stage.bodyTranslationKey(this.profile));
+    private Component bodyForNode(WayfinderDialogueNode node) {
+        return Component.translatable(node.bodyTranslationKey(this.profile));
     }
 
-    private void showIntroOptions() {
-        this.addDialogueButton(0, Component.translatable("screen.hidden_places.test_wayfinder.option.who"),
-                button -> this.showStage(WayfinderDialogueStage.WHO, true));
-        this.addDialogueButton(1, Component.translatable("screen.hidden_places.test_wayfinder.option.sanctum"),
-                button -> this.showStage(WayfinderDialogueStage.SANCTUM, true));
-        if (this.profile.hasTrade()) {
-            this.addDialogueButton(2, Component.translatable("screen.hidden_places.test_wayfinder.option.trade"),
-                    button -> this.openTrade());
+    private void choose(int choiceIndex) {
+        if (choiceIndex < 0 || choiceIndex >= this.node.choices().size()) {
+            return;
         }
-        this.addDialogueButton(3, Component.translatable("screen.hidden_places.test_wayfinder.option.insult"),
-                button -> this.showStage(WayfinderDialogueStage.HOSTILE_DEAD_END, true));
-    }
 
-    private void showWhoOptions() {
-        if (this.profile.hasTrade()) {
-            this.addDialogueButton(0, Component.translatable("screen.hidden_places.test_wayfinder.option.trade"),
-                    button -> this.openTrade());
+        WayfinderDialogueChoice choice = this.node.choices().get(choiceIndex);
+        PacketDistributor.sendToServer(new WayfinderDialogueChoicePayload(this.entityId, choiceIndex));
+
+        if (choice.action() == WayfinderDialogueAction.GOTO_NODE && choice.targetNodeId() != null) {
+            this.showNode(choice.targetNodeId());
+            return;
         }
-        this.addDialogueButton(1, Component.translatable("screen.hidden_places.test_wayfinder.option.leave"),
-                button -> Minecraft.getInstance().setScreen(null));
-    }
 
-    private void showSanctumOptions() {
-        if (this.profile.hasTrade()) {
-            this.addDialogueButton(0, Component.translatable("screen.hidden_places.test_wayfinder.option.trade"),
-                    button -> this.openTrade());
+        if (choice.action() == WayfinderDialogueAction.OPEN_TRADE) {
+            this.openTrade();
+            return;
         }
-        this.addDialogueButton(1, Component.translatable("screen.hidden_places.test_wayfinder.option.leave"),
-                button -> Minecraft.getInstance().setScreen(null));
-    }
 
-    private void showTradeOptions() {
-        if (this.profile.hasTrade()) {
-            this.addDialogueButton(0, Component.translatable("screen.hidden_places.test_wayfinder.option.trade_open"),
-                    button -> this.openTrade());
+        if (choice.action() == WayfinderDialogueAction.START_FIGHT || choice.action() == WayfinderDialogueAction.CLOSE) {
+            this.suppressClosePacket = true;
+            Minecraft.getInstance().setScreen(null);
+            return;
         }
-        this.addDialogueButton(1, Component.translatable("screen.hidden_places.test_wayfinder.option.leave"),
-                button -> Minecraft.getInstance().setScreen(null));
-    }
 
-    private void showTradeCompletedOptions() {
-        this.addDialogueButton(0, Component.translatable("screen.hidden_places.test_wayfinder.option.leave"),
-                button -> Minecraft.getInstance().setScreen(null));
-    }
-
-    private void showHostileOptions() {
-        if (this.profile.canBecomeHostileFromDialogue()) {
-            this.addDialogueButton(0, Component.translatable("screen.hidden_places.test_wayfinder.option.trouble"),
-                    button -> this.startFight());
+        if (choice.action() == WayfinderDialogueAction.COMPLETE) {
+            this.showNode(this.profile.completedNodeId());
         }
-        this.addDialogueButton(1, Component.translatable("screen.hidden_places.test_wayfinder.option.leave"),
-                button -> Minecraft.getInstance().setScreen(null));
     }
 
     private void openTrade() {
@@ -130,34 +104,8 @@ public class TestWayfinderDialogueScreen extends Screen {
             return;
         }
 
-        PacketDistributor.sendToServer(new WayfinderDialogueChoicePayload(
-                this.entityId,
-                WayfinderDialogueChoicePayload.CHOICE_OPEN_TRADE
-        ));
         this.suppressClosePacket = true;
         Minecraft.getInstance().setScreen(new TestWayfinderTradeScreen(this.entityId, this.profile));
-    }
-
-    private void startFight() {
-        this.suppressClosePacket = true;
-        PacketDistributor.sendToServer(new WayfinderDialogueChoicePayload(
-                this.entityId,
-                WayfinderDialogueChoicePayload.CHOICE_TROUBLE
-        ));
-        Minecraft.getInstance().setScreen(null);
-    }
-
-    private void sendStageToServer(WayfinderDialogueStage stage) {
-        int choice = switch (stage) {
-            case WHO -> WayfinderDialogueChoicePayload.CHOICE_STAGE_WHO;
-            case SANCTUM -> WayfinderDialogueChoicePayload.CHOICE_STAGE_SANCTUM;
-            case TRADE -> WayfinderDialogueChoicePayload.CHOICE_STAGE_TRADE;
-            case HOSTILE_DEAD_END -> WayfinderDialogueChoicePayload.CHOICE_STAGE_HOSTILE_DEAD_END;
-            case TRADE_COMPLETED -> WayfinderDialogueChoicePayload.CHOICE_STAGE_TRADE_COMPLETED;
-            case INTRO -> WayfinderDialogueChoicePayload.CHOICE_STAGE_INTRO;
-        };
-
-        PacketDistributor.sendToServer(new WayfinderDialogueChoicePayload(this.entityId, choice));
     }
 
     private void addDialogueButton(int index, Component text, Button.OnPress onPress) {

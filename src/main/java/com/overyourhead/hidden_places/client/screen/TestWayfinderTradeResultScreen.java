@@ -28,7 +28,7 @@ public class TestWayfinderTradeResultScreen extends Screen {
     private boolean suppressClosePacket;
 
     public TestWayfinderTradeResultScreen(int entityId, WayfinderProfile profile, int resultCode) {
-        super(Component.translatable("screen.hidden_places.test_wayfinder.trade.result.title"));
+        super(Component.translatable("screen.hidden_places." + profile.translationKey() + ".trade.result.title"));
         this.entityId = entityId;
         this.profile = profile;
         this.resultCode = resultCode;
@@ -47,7 +47,7 @@ public class TestWayfinderTradeResultScreen extends Screen {
                     buttonY,
                     BUTTON_WIDTH,
                     BUTTON_HEIGHT,
-                    Component.translatable("screen.hidden_places.test_wayfinder.trade.result.back_trade"),
+                    Component.translatable(this.translationKey("trade.result.back_trade")),
                     button -> this.returnToTrade()
             ));
 
@@ -56,7 +56,7 @@ public class TestWayfinderTradeResultScreen extends Screen {
                     buttonY + 24,
                     BUTTON_WIDTH,
                     BUTTON_HEIGHT,
-                    Component.translatable("screen.hidden_places.test_wayfinder.trade.result.leave"),
+                    Component.translatable(this.translationKey("trade.result.leave")),
                     button -> Minecraft.getInstance().setScreen(null)
             ));
             return;
@@ -67,7 +67,7 @@ public class TestWayfinderTradeResultScreen extends Screen {
                 buttonY,
                 BUTTON_WIDTH,
                 BUTTON_HEIGHT,
-                Component.translatable("screen.hidden_places.test_wayfinder.trade.result.done"),
+                Component.translatable(this.translationKey("trade.result.done")),
                 button -> Minecraft.getInstance().setScreen(null)
         ));
     }
@@ -82,13 +82,17 @@ public class TestWayfinderTradeResultScreen extends Screen {
         Minecraft.getInstance().setScreen(new TestWayfinderTradeScreen(this.entityId, this.profile));
     }
 
+    private String translationKey(String suffix) {
+        return "screen.hidden_places." + this.profile.translationKey() + "." + suffix;
+    }
+
     private Component resultMessage() {
         return Component.translatable(switch (this.resultCode) {
-            case WayfinderTradeResultPayload.SUCCESS -> "screen.hidden_places.test_wayfinder.trade.result.success";
-            case WayfinderTradeResultPayload.NO_PAYMENT -> "screen.hidden_places.test_wayfinder.trade.result.no_payment";
-            case WayfinderTradeResultPayload.INVENTORY_FULL -> "screen.hidden_places.test_wayfinder.trade.result.inventory_full";
-            case WayfinderTradeResultPayload.ALREADY_TRADED -> "screen.hidden_places.test_wayfinder.trade.result.already_traded";
-            default -> "screen.hidden_places.test_wayfinder.trade.result.failed";
+            case WayfinderTradeResultPayload.SUCCESS -> this.translationKey("trade.result.success");
+            case WayfinderTradeResultPayload.NO_PAYMENT -> this.translationKey("trade.result.no_payment");
+            case WayfinderTradeResultPayload.INVENTORY_FULL -> this.translationKey("trade.result.inventory_full");
+            case WayfinderTradeResultPayload.ALREADY_TRADED -> this.translationKey("trade.result.already_traded");
+            default -> this.translationKey("trade.result.failed");
         });
     }
 

@@ -4,7 +4,6 @@ import com.overyourhead.hidden_places.HiddenPlacesMod;
 import com.overyourhead.hidden_places.client.screen.widget.WayfinderButton;
 import com.overyourhead.hidden_places.common.entity.TestWayfinderEntity;
 import com.overyourhead.hidden_places.common.network.WayfinderDialogueChoicePayload;
-import com.overyourhead.hidden_places.common.npc.WayfinderDialogueStage;
 import com.overyourhead.hidden_places.common.network.WayfinderTradePayload;
 import com.overyourhead.hidden_places.common.npc.WayfinderProfile;
 import com.overyourhead.hidden_places.common.npc.WayfinderTradeOffer;
@@ -32,7 +31,7 @@ public class TestWayfinderTradeScreen extends Screen {
     private boolean suppressClosePacket;
 
     public TestWayfinderTradeScreen(int entityId, WayfinderProfile profile) {
-        super(Component.translatable("screen.hidden_places.test_wayfinder.trade.title"));
+        super(Component.translatable("screen.hidden_places." + profile.translationKey() + ".trade.title"));
         this.entityId = entityId;
         this.profile = profile;
         this.offer = profile.tradeOffer();
@@ -64,7 +63,7 @@ public class TestWayfinderTradeScreen extends Screen {
                 buttonY + 24,
                 BUTTON_WIDTH,
                 BUTTON_HEIGHT,
-                Component.translatable("screen.hidden_places.test_wayfinder.trade.back"),
+                Component.translatable(this.translationKey("trade.back")),
                 button -> this.returnToDialogue()
         ));
     }
@@ -85,11 +84,15 @@ public class TestWayfinderTradeScreen extends Screen {
         Entity entity = minecraft.level.getEntity(this.entityId);
         if (entity instanceof TestWayfinderEntity wayfinder) {
             this.suppressClosePacket = true;
-            minecraft.setScreen(new TestWayfinderDialogueScreen(wayfinder, WayfinderDialogueStage.TRADE));
+            minecraft.setScreen(new TestWayfinderDialogueScreen(wayfinder, this.profile.tradeNodeId()));
             return;
         }
 
         minecraft.setScreen(null);
+    }
+
+    private String translationKey(String suffix) {
+        return "screen.hidden_places." + this.profile.translationKey() + "." + suffix;
     }
 
     @Override
@@ -106,7 +109,7 @@ public class TestWayfinderTradeScreen extends Screen {
         graphics.drawString(this.font, this.title, left + 12, top + 12, 0xFFE6D3A3, false);
         graphics.drawWordWrap(
                 this.font,
-                Component.translatable("screen.hidden_places.test_wayfinder.trade.body"),
+                Component.translatable(this.translationKey("trade.body")),
                 left + 12,
                 top + 38,
                 PANEL_WIDTH - 24,
