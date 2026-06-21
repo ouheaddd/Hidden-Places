@@ -1,8 +1,10 @@
 package com.overyourhead.hidden_places.core.registry;
 
 import com.overyourhead.hidden_places.HiddenPlacesMod;
+import com.overyourhead.hidden_places.common.entity.BloomletEntity;
 import com.overyourhead.hidden_places.common.entity.MossgateWayfinderEntity;
 import com.overyourhead.hidden_places.common.entity.TestWayfinderEntity;
+import com.overyourhead.hidden_places.common.entity.projectile.BloomletPetalProjectileEntity;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.MobCategory;
@@ -34,6 +36,23 @@ public final class HPEntities {
                     .updateInterval(3)
                     .build("mossgate_wayfinder"));
 
+    public static final DeferredHolder<EntityType<?>, EntityType<BloomletEntity>> BLOOMLET =
+            ENTITY_TYPES.register("bloomlet", () -> EntityType.Builder
+                    .of(BloomletEntity::new, MobCategory.CREATURE)
+                    .sized(0.8F, 1.0F)
+                    .eyeHeight(0.65F)
+                    .clientTrackingRange(8)
+                    .updateInterval(3)
+                    .build("bloomlet"));
+
+    public static final DeferredHolder<EntityType<?>, EntityType<BloomletPetalProjectileEntity>> BLOOMLET_PETAL_PROJECTILE =
+            ENTITY_TYPES.register("bloomlet_petal_projectile", () -> EntityType.Builder
+                    .<BloomletPetalProjectileEntity>of(BloomletPetalProjectileEntity::new, MobCategory.MISC)
+                    .sized(0.25F, 0.25F)
+                    .clientTrackingRange(8)
+                    .updateInterval(1)
+                    .build("bloomlet_petal_projectile"));
+
     private HPEntities() {
     }
 
@@ -44,6 +63,7 @@ public final class HPEntities {
     public static void registerAttributes(EntityAttributeCreationEvent event) {
         event.put(TEST_WAYFINDER.get(), TestWayfinderEntity.createAttributes().build());
         event.put(MOSSGATE_WAYFINDER.get(), MossgateWayfinderEntity.createAttributes().build());
+        event.put(BLOOMLET.get(), BloomletEntity.createAttributes().build());
     }
 
     public static void registerSpawnPlacements(RegisterSpawnPlacementsEvent event) {

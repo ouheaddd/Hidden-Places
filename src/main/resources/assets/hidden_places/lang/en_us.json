@@ -98,5 +98,7 @@
   "screen.hidden_places.mossgate_wayfinder.trade.result.failed": "The trade failed. Something about the bargain went wrong.",
   "screen.hidden_places.mossgate_wayfinder.trade.result.back_trade": "Back to trade.",
   "screen.hidden_places.mossgate_wayfinder.trade.result.leave": "Leave.",
-  "screen.hidden_places.mossgate_wayfinder.trade.result.done": "Done."
+  "screen.hidden_places.mossgate_wayfinder.trade.result.done": "Done.",
+  "entity.hidden_places.bloomlet": "Bloomlet",
+  "item.hidden_places.bloomlet_spawn_egg": "Bloomlet Spawn Egg"
 }

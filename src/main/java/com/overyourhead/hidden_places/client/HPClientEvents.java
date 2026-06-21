@@ -1,6 +1,7 @@
 package com.overyourhead.hidden_places.client;
 
 import com.overyourhead.hidden_places.HiddenPlacesMod;
+import com.overyourhead.hidden_places.client.renderer.BloomletRenderer;
 import com.overyourhead.hidden_places.client.renderer.FrostboundChestRenderer;
 import com.overyourhead.hidden_places.client.renderer.MossgateChestRenderer;
 import com.overyourhead.hidden_places.client.renderer.MossgateWayfinderRenderer;
@@ -17,6 +18,7 @@ import com.overyourhead.hidden_places.core.registry.HPMenuTypes;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
+import net.minecraft.client.renderer.entity.ThrownItemRenderer;
 import net.neoforged.neoforge.client.event.EntityRenderersEvent;
 import net.neoforged.neoforge.client.event.RegisterMenuScreensEvent;
 
@@ -42,5 +44,7 @@ public final class HPClientEvents {
 
         event.registerEntityRenderer(HPEntities.TEST_WAYFINDER.get(), TestWayfinderRenderer::new);
         event.registerEntityRenderer(HPEntities.MOSSGATE_WAYFINDER.get(), MossgateWayfinderRenderer::new);
+        event.registerEntityRenderer(HPEntities.BLOOMLET.get(), BloomletRenderer::new);
+        event.registerEntityRenderer(HPEntities.BLOOMLET_PETAL_PROJECTILE.get(), ThrownItemRenderer::new);
     }
 }
