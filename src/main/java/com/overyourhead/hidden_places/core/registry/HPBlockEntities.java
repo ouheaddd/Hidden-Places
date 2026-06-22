@@ -2,6 +2,7 @@ package com.overyourhead.hidden_places.core.registry;
 
 import com.overyourhead.hidden_places.HiddenPlacesMod;
 import com.overyourhead.hidden_places.common.block.entity.FrostboundChestBlockEntity;
+import com.overyourhead.hidden_places.common.block.entity.JungleOfferingPedestalBlockEntity;
 import com.overyourhead.hidden_places.common.block.entity.MossgateChestBlockEntity;
 import com.overyourhead.hidden_places.common.block.entity.SunveilChestBlockEntity;
 import com.overyourhead.hidden_places.common.block.entity.WildrootChestBlockEntity;
@@ -31,6 +32,10 @@ public final class HPBlockEntities {
 
     public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<WildrootChestBlockEntity>> WILDROOT_CHEST =
             register("wildroot_chest", WildrootChestBlockEntity::new, HPBlocks.WILDROOT_CHEST);
+
+
+    public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<JungleOfferingPedestalBlockEntity>> JUNGLE_OFFERING_PEDESTAL =
+            register("jungle_offering_pedestal", JungleOfferingPedestalBlockEntity::new, HPBlocks.JUNGLE_OFFERING_PEDESTAL);
 
     private HPBlockEntities() {
     }

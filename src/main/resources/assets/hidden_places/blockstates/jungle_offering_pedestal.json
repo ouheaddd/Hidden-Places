@@ -1,0 +1,8 @@
+{
+  "variants": {
+    "facing=north": { "model": "hidden_places:block/jungle_offering_pedestal" },
+    "facing=east": { "model": "hidden_places:block/jungle_offering_pedestal", "y": 90 },
+    "facing=south": { "model": "hidden_places:block/jungle_offering_pedestal", "y": 180 },
+    "facing=west": { "model": "hidden_places:block/jungle_offering_pedestal", "y": 270 }
+  }
+}

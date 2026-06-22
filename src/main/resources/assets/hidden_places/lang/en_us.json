@@ -102,5 +102,7 @@
   "entity.hidden_places.bloomlet": "Bloomlet",
   "item.hidden_places.bloomlet_spawn_egg": "Bloomlet Spawn Egg",
   "block.hidden_places.jungle_mosaic_tile": "Jungle Mosaic Tile",
-  "item.hidden_places.jungle_mosaic_placer": "Jungle Mosaic Placer"
+  "item.hidden_places.jungle_mosaic_placer": "Jungle Mosaic Placer",
+  "block.hidden_places.jungle_offering_pedestal": "Jungle Offering Pedestal",
+  "message.hidden_places.jungle_offering_pedestal.occupied": "The pedestal is already holding an offering."
 }
