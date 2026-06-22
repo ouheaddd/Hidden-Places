@@ -1,0 +1,7 @@
+{
+  "variants": {
+    "": {
+      "model": "hidden_places:block/jungle_path_controller"
+    }
+  }
+}

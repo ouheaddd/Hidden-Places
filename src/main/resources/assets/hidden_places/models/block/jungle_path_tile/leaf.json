@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:block/cube_column",
+  "textures": {
+    "end": "hidden_places:block/jungle_path_tile/leaf",
+    "side": "hidden_places:block/jungle_path_tile/side"
+  }
+}

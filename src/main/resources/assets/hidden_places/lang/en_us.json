@@ -104,5 +104,8 @@
   "block.hidden_places.jungle_mosaic_tile": "Jungle Mosaic Tile",
   "item.hidden_places.jungle_mosaic_placer": "Jungle Mosaic Placer",
   "block.hidden_places.jungle_offering_pedestal": "Jungle Offering Pedestal",
-  "message.hidden_places.jungle_offering_pedestal.occupied": "The pedestal is already holding an offering."
+  "message.hidden_places.jungle_offering_pedestal.occupied": "The pedestal is already holding an offering.",
+  "block.hidden_places.jungle_path_tile": "Jungle Path Tile",
+  "item.hidden_places.jungle_path_trial_placer": "Jungle Path Trial Placer",
+  "block.hidden_places.jungle_path_controller": "Jungle Path Controller"
 }

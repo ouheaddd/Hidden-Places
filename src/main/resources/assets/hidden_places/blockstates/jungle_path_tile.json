@@ -1,0 +1,94 @@
+{
+  "multipart": [
+    {
+      "when": {
+        "symbol": "0",
+        "lit": "false"
+      },
+      "apply": {
+        "model": "hidden_places:block/jungle_path_tile/leaf"
+      }
+    },
+    {
+      "when": {
+        "symbol": "0",
+        "lit": "true"
+      },
+      "apply": {
+        "model": "hidden_places:block/jungle_path_tile/leaf_lit"
+      }
+    },
+    {
+      "when": {
+        "symbol": "1",
+        "lit": "false"
+      },
+      "apply": {
+        "model": "hidden_places:block/jungle_path_tile/sun"
+      }
+    },
+    {
+      "when": {
+        "symbol": "1",
+        "lit": "true"
+      },
+      "apply": {
+        "model": "hidden_places:block/jungle_path_tile/sun_lit"
+      }
+    },
+    {
+      "when": {
+        "symbol": "2",
+        "lit": "false"
+      },
+      "apply": {
+        "model": "hidden_places:block/jungle_path_tile/water"
+      }
+    },
+    {
+      "when": {
+        "symbol": "2",
+        "lit": "true"
+      },
+      "apply": {
+        "model": "hidden_places:block/jungle_path_tile/water_lit"
+      }
+    },
+    {
+      "when": {
+        "symbol": "3",
+        "lit": "false"
+      },
+      "apply": {
+        "model": "hidden_places:block/jungle_path_tile/snake"
+      }
+    },
+    {
+      "when": {
+        "symbol": "3",
+        "lit": "true"
+      },
+      "apply": {
+        "model": "hidden_places:block/jungle_path_tile/snake_lit"
+      }
+    },
+    {
+      "when": {
+        "symbol": "4",
+        "lit": "false"
+      },
+      "apply": {
+        "model": "hidden_places:block/jungle_path_tile/flower"
+      }
+    },
+    {
+      "when": {
+        "symbol": "4",
+        "lit": "true"
+      },
+      "apply": {
+        "model": "hidden_places:block/jungle_path_tile/flower_lit"
+      }
+    }
+  ]
+}

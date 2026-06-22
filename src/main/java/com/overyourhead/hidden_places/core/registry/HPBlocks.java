@@ -3,6 +3,8 @@ package com.overyourhead.hidden_places.core.registry;
 import com.overyourhead.hidden_places.HiddenPlacesMod;
 import com.overyourhead.hidden_places.common.block.FrostboundChestBlock;
 import com.overyourhead.hidden_places.common.block.JungleMosaicTileBlock;
+import com.overyourhead.hidden_places.common.block.JunglePathControllerBlock;
+import com.overyourhead.hidden_places.common.block.JunglePathTileBlock;
 import com.overyourhead.hidden_places.common.block.JungleOfferingPedestalBlock;
 import com.overyourhead.hidden_places.common.block.MossgateChestBlock;
 import com.overyourhead.hidden_places.common.block.SunveilChestBlock;
@@ -52,6 +54,16 @@ public final class HPBlocks {
     public static final DeferredBlock<JungleOfferingPedestalBlock> JUNGLE_OFFERING_PEDESTAL = registerBlock(
             "jungle_offering_pedestal",
             () -> new JungleOfferingPedestalBlock(JungleOfferingPedestalBlock.createProperties())
+    );
+
+    public static final DeferredBlock<JunglePathTileBlock> JUNGLE_PATH_TILE = registerBlock(
+            "jungle_path_tile",
+            () -> new JunglePathTileBlock(JunglePathTileBlock.createProperties())
+    );
+
+    public static final DeferredBlock<JunglePathControllerBlock> JUNGLE_PATH_CONTROLLER = registerBlockWithoutItem(
+            "jungle_path_controller",
+            () -> new JunglePathControllerBlock(JunglePathControllerBlock.createProperties())
     );
 
     /*

@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:block/cube_column",
+  "textures": {
+    "end": "hidden_places:block/jungle_path_tile/snake_lit",
+    "side": "hidden_places:block/jungle_path_tile/side"
+  }
+}
