@@ -100,5 +100,7 @@
   "screen.hidden_places.mossgate_wayfinder.trade.result.leave": "Leave.",
   "screen.hidden_places.mossgate_wayfinder.trade.result.done": "Done.",
   "entity.hidden_places.bloomlet": "Bloomlet",
-  "item.hidden_places.bloomlet_spawn_egg": "Bloomlet Spawn Egg"
+  "item.hidden_places.bloomlet_spawn_egg": "Bloomlet Spawn Egg",
+  "block.hidden_places.jungle_mosaic_tile": "Jungle Mosaic Tile",
+  "item.hidden_places.jungle_mosaic_placer": "Jungle Mosaic Placer"
 }

@@ -1,6 +1,7 @@
 package com.overyourhead.hidden_places.core.registry;
 
 import com.overyourhead.hidden_places.HiddenPlacesMod;
+import com.overyourhead.hidden_places.common.item.JungleMosaicPlacerItem;
 import com.overyourhead.hidden_places.common.item.SealedSanctumMapItem;
 import net.minecraft.world.item.Item;
 import net.neoforged.bus.api.IEventBus;
@@ -42,6 +43,9 @@ public final class HPItems {
 
     public static final DeferredItem<Item> SEALED_SANCTUM_MAP =
             registerItem("sealed_sanctum_map", () -> new SealedSanctumMapItem(new Item.Properties()));
+
+    public static final DeferredItem<Item> JUNGLE_MOSAIC_PLACER =
+            registerItem("jungle_mosaic_placer", () -> new JungleMosaicPlacerItem(new Item.Properties()));
 
     public static final DeferredItem<DeferredSpawnEggItem> TEST_WAYFINDER_SPAWN_EGG =
             ITEMS.register("test_wayfinder_spawn_egg", () -> new DeferredSpawnEggItem(
