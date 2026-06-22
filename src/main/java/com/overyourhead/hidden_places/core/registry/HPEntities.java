@@ -48,8 +48,8 @@ public final class HPEntities {
     public static final DeferredHolder<EntityType<?>, EntityType<BloomletPetalProjectileEntity>> BLOOMLET_PETAL_PROJECTILE =
             ENTITY_TYPES.register("bloomlet_petal_projectile", () -> EntityType.Builder
                     .<BloomletPetalProjectileEntity>of(BloomletPetalProjectileEntity::new, MobCategory.MISC)
-                    .sized(0.25F, 0.25F)
-                    .clientTrackingRange(8)
+                    .sized(0.55F, 0.55F)
+                    .clientTrackingRange(10)
                     .updateInterval(1)
                     .build("bloomlet_petal_projectile"));
 

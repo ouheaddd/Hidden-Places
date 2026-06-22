@@ -1,0 +1,29 @@
+{
+  "entity.bloomlet.tame_success": {
+    "sounds": ["hidden_places:entity/bloomlet/tame_success"]
+  },
+  "entity.bloomlet.attack_charge": {
+    "sounds": ["hidden_places:entity/bloomlet/attack_charge"]
+  },
+  "entity.bloomlet.projectile_launch": {
+    "sounds": ["hidden_places:entity/bloomlet/projectile_launch"]
+  },
+  "entity.bloomlet.projectile_pop": {
+    "sounds": ["hidden_places:entity/bloomlet/projectile_pop"]
+  },
+  "entity.bloomlet.hurt": {
+    "sounds": ["hidden_places:entity/bloomlet/hurt"]
+  },
+  "entity.bloomlet.death": {
+    "sounds": ["hidden_places:entity/bloomlet/death"]
+  },
+  "entity.bloomlet.sit": {
+    "sounds": ["hidden_places:entity/bloomlet/sit"]
+  },
+  "entity.bloomlet.stand_up": {
+    "sounds": ["hidden_places:entity/bloomlet/stand_up"]
+  },
+  "entity.bloomlet.idle": {
+    "sounds": ["hidden_places:entity/bloomlet/idle"]
+  }
+}

@@ -1,6 +1,8 @@
 package com.overyourhead.hidden_places.client;
 
 import com.overyourhead.hidden_places.HiddenPlacesMod;
+import com.overyourhead.hidden_places.client.particle.BloomletSporeParticle;
+import com.overyourhead.hidden_places.client.renderer.BloomletPetalProjectileRenderer;
 import com.overyourhead.hidden_places.client.renderer.BloomletRenderer;
 import com.overyourhead.hidden_places.client.renderer.FrostboundChestRenderer;
 import com.overyourhead.hidden_places.client.renderer.MossgateChestRenderer;
@@ -15,11 +17,12 @@ import com.overyourhead.hidden_places.client.screen.WildrootChestScreen;
 import com.overyourhead.hidden_places.core.registry.HPBlockEntities;
 import com.overyourhead.hidden_places.core.registry.HPEntities;
 import com.overyourhead.hidden_places.core.registry.HPMenuTypes;
+import com.overyourhead.hidden_places.core.registry.HPParticleTypes;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
-import net.minecraft.client.renderer.entity.ThrownItemRenderer;
 import net.neoforged.neoforge.client.event.EntityRenderersEvent;
+import net.neoforged.neoforge.client.event.RegisterParticleProvidersEvent;
 import net.neoforged.neoforge.client.event.RegisterMenuScreensEvent;
 
 @EventBusSubscriber(modid = HiddenPlacesMod.MOD_ID, bus = EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
@@ -35,6 +38,12 @@ public final class HPClientEvents {
         event.register(HPMenuTypes.WILDROOT_CHEST.get(), WildrootChestScreen::new);
     }
 
+
+    @SubscribeEvent
+    public static void registerParticleProviders(RegisterParticleProvidersEvent event) {
+        event.registerSpriteSet(HPParticleTypes.BLOOMLET_SPORE.get(), BloomletSporeParticle.Provider::new);
+    }
+
     @SubscribeEvent
     public static void registerRenderers(EntityRenderersEvent.RegisterRenderers event) {
         event.registerBlockEntityRenderer(HPBlockEntities.MOSSGATE_CHEST.get(), MossgateChestRenderer::new);
@@ -45,6 +54,6 @@ public final class HPClientEvents {
         event.registerEntityRenderer(HPEntities.TEST_WAYFINDER.get(), TestWayfinderRenderer::new);
         event.registerEntityRenderer(HPEntities.MOSSGATE_WAYFINDER.get(), MossgateWayfinderRenderer::new);
         event.registerEntityRenderer(HPEntities.BLOOMLET.get(), BloomletRenderer::new);
-        event.registerEntityRenderer(HPEntities.BLOOMLET_PETAL_PROJECTILE.get(), ThrownItemRenderer::new);
+        event.registerEntityRenderer(HPEntities.BLOOMLET_PETAL_PROJECTILE.get(), BloomletPetalProjectileRenderer::new);
     }
 }

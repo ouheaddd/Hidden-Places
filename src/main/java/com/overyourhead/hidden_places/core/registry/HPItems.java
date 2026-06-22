@@ -62,8 +62,8 @@ public final class HPItems {
     public static final DeferredItem<DeferredSpawnEggItem> BLOOMLET_SPAWN_EGG =
             ITEMS.register("bloomlet_spawn_egg", () -> new DeferredSpawnEggItem(
                     HPEntities.BLOOMLET,
-                    0x8B6A43,
-                    0xF26BC9,
+                    0xFFFFFF,
+                    0xFFFFFF,
                     new Item.Properties()
             ));
 
