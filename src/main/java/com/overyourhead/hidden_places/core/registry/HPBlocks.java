@@ -5,6 +5,7 @@ import com.overyourhead.hidden_places.common.block.FrostboundChestBlock;
 import com.overyourhead.hidden_places.common.block.JungleMosaicTileBlock;
 import com.overyourhead.hidden_places.common.block.JunglePathControllerBlock;
 import com.overyourhead.hidden_places.common.block.JunglePathTileBlock;
+import com.overyourhead.hidden_places.common.block.JungleTrialMasterControllerBlock;
 import com.overyourhead.hidden_places.common.block.JungleOfferingPedestalBlock;
 import com.overyourhead.hidden_places.common.block.MossgateChestBlock;
 import com.overyourhead.hidden_places.common.block.SunveilChestBlock;
@@ -64,6 +65,11 @@ public final class HPBlocks {
     public static final DeferredBlock<JunglePathControllerBlock> JUNGLE_PATH_CONTROLLER = registerBlockWithoutItem(
             "jungle_path_controller",
             () -> new JunglePathControllerBlock(JunglePathControllerBlock.createProperties())
+    );
+
+    public static final DeferredBlock<JungleTrialMasterControllerBlock> JUNGLE_TRIAL_MASTER_CONTROLLER = registerBlockWithoutItem(
+            "jungle_trial_master_controller",
+            () -> new JungleTrialMasterControllerBlock(JungleTrialMasterControllerBlock.createProperties())
     );
 
     /*

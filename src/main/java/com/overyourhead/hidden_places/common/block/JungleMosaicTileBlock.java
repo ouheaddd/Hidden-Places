@@ -1,6 +1,7 @@
 package com.overyourhead.hidden_places.common.block;
 
 import com.mojang.serialization.MapCodec;
+import com.overyourhead.hidden_places.common.block.entity.JungleTrialMasterControllerBlockEntity;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.Holder;
@@ -146,6 +147,8 @@ public class JungleMosaicTileBlock extends HorizontalDirectionalBlock {
         level.playSound(null, center, sound(SoundEvents.AMETHYST_BLOCK_CHIME), SoundSource.BLOCKS, 1.1F, 0.75F);
         level.playSound(null, center, sound(SoundEvents.GENERIC_EXPLODE), SoundSource.BLOCKS, 0.45F, 1.6F);
         spawnMosaicDust(level, center, 34, 0.45D, 0.35D, 0.45D, 0.03D);
+        JungleTrialMasterControllerBlockEntity.findNearest(level, center)
+                .ifPresent(masterController -> masterController.setMosaicSolved(level, center));
 
         for (int row = 0; row < HEIGHT; row++) {
             for (int col = 0; col < WIDTH; col++) {

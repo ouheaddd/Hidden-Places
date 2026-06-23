@@ -35,6 +35,8 @@ public class JunglePathControllerBlockEntity extends BlockEntity {
     private int currentStep;
     private boolean solved;
     private int failCooldown;
+    @Nullable
+    private BlockPos masterControllerPos;
 
     public JunglePathControllerBlockEntity(BlockPos pos, BlockState blockState) {
         super(HPBlockEntities.JUNGLE_PATH_CONTROLLER.get(), pos, blockState);
@@ -66,8 +68,54 @@ public class JunglePathControllerBlockEntity extends BlockEntity {
         return Optional.ofNullable(nearest);
     }
 
+    public void setMasterControllerPos(@Nullable BlockPos masterControllerPos) {
+        this.masterControllerPos = masterControllerPos;
+        this.setChangedAndSync();
+    }
+
+    private Optional<JungleTrialMasterControllerBlockEntity> getMasterController(ServerLevel serverLevel) {
+        if (this.masterControllerPos == null) {
+            return Optional.empty();
+        }
+
+        BlockEntity blockEntity = serverLevel.getBlockEntity(this.masterControllerPos);
+        if (blockEntity instanceof JungleTrialMasterControllerBlockEntity masterController) {
+            return Optional.of(masterController);
+        }
+
+        return Optional.empty();
+    }
+
+    private boolean isPathUnlocked(ServerLevel serverLevel) {
+        if (this.masterControllerPos == null) {
+            return true;
+        }
+
+        return this.getMasterController(serverLevel)
+                .map(JungleTrialMasterControllerBlockEntity::isPathUnlocked)
+                .orElse(false);
+    }
+
+    private void lockedFeedback(ServerLevel serverLevel, BlockPos tilePos) {
+        if (this.failCooldown > 0) {
+            return;
+        }
+
+        this.failCooldown = FAIL_COOLDOWN_TICKS;
+        double x = tilePos.getX() + 0.5D;
+        double y = tilePos.getY() + 1.04D;
+        double z = tilePos.getZ() + 0.5D;
+        serverLevel.sendParticles(ParticleTypes.SMOKE, x, y, z, 8, 0.22D, 0.04D, 0.22D, 0.005D);
+        serverLevel.playSound(null, tilePos, sound(SoundEvents.DEEPSLATE_BRICKS_PLACE), SoundSource.BLOCKS, 0.35F, 0.45F);
+    }
+
     public void handleTileStep(ServerPlayer player, BlockPos tilePos, BlockState tileState) {
         if (!(this.level instanceof ServerLevel serverLevel) || this.solved) {
+            return;
+        }
+
+        if (!this.isPathUnlocked(serverLevel)) {
+            this.lockedFeedback(serverLevel, tilePos);
             return;
         }
 
@@ -130,7 +178,12 @@ public class JunglePathControllerBlockEntity extends BlockEntity {
         serverLevel.sendParticles(ParticleTypes.ENCHANT, x, y, z, 25, 0.7D, 0.25D, 0.7D, 0.06D);
         serverLevel.playSound(null, this.worldPosition, sound(SoundEvents.ENCHANTMENT_TABLE_USE), SoundSource.BLOCKS, 0.85F, 1.1F);
 
-        this.activateNearbyPedestals(serverLevel);
+        Optional<JungleTrialMasterControllerBlockEntity> masterController = this.getMasterController(serverLevel);
+        if (masterController.isPresent()) {
+            masterController.get().setPathSolved(serverLevel, this.worldPosition);
+        } else {
+            this.activateNearbyPedestals(serverLevel);
+        }
     }
 
     private void clearLitTiles(ServerLevel serverLevel) {
@@ -180,6 +233,21 @@ public class JunglePathControllerBlockEntity extends BlockEntity {
         player.teleportTo(x, y, z);
     }
 
+
+    public void resetTrial(ServerLevel serverLevel) {
+        this.currentStep = 0;
+        this.solved = false;
+        this.failCooldown = 0;
+        this.clearLitTiles(serverLevel);
+        this.setChangedAndSync();
+
+        serverLevel.sendParticles(ParticleTypes.SPORE_BLOSSOM_AIR,
+                this.worldPosition.getX() + 0.5D,
+                this.worldPosition.getY() + 2.0D,
+                this.worldPosition.getZ() + 0.5D,
+                18, 0.45D, 0.16D, 0.45D, 0.01D);
+    }
+
     public boolean isSolved() {
         return this.solved;
     }
@@ -210,6 +278,9 @@ public class JunglePathControllerBlockEntity extends BlockEntity {
         tag.putInt("CurrentStep", this.currentStep);
         tag.putBoolean("Solved", this.solved);
         tag.putInt("FailCooldown", this.failCooldown);
+        if (this.masterControllerPos != null) {
+            tag.putLong("MasterControllerPos", this.masterControllerPos.asLong());
+        }
     }
 
     @Override
@@ -218,6 +289,7 @@ public class JunglePathControllerBlockEntity extends BlockEntity {
         this.currentStep = tag.getInt("CurrentStep");
         this.solved = tag.getBoolean("Solved");
         this.failCooldown = tag.getInt("FailCooldown");
+        this.masterControllerPos = tag.contains("MasterControllerPos") ? BlockPos.of(tag.getLong("MasterControllerPos")) : null;
     }
 
     @Override

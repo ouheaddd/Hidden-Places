@@ -30,6 +30,8 @@ import software.bernie.geckolib.animation.PlayState;
 import software.bernie.geckolib.animation.RawAnimation;
 import software.bernie.geckolib.util.GeckoLibUtil;
 
+import java.util.Optional;
+
 public class JungleOfferingPedestalBlockEntity extends BlockEntity implements GeoBlockEntity {
     private static final RawAnimation IDLE = RawAnimation.begin().thenLoop("idle");
     private static final int TRANSFORM_DELAY_TICKS = 35;
@@ -40,6 +42,8 @@ public class JungleOfferingPedestalBlockEntity extends BlockEntity implements Ge
     private boolean protectedMode;
     private boolean accepted;
     private int transformTicks;
+    @Nullable
+    private BlockPos masterControllerPos;
 
     public JungleOfferingPedestalBlockEntity(BlockPos pos, BlockState blockState) {
         super(HPBlockEntities.JUNGLE_OFFERING_PEDESTAL.get(), pos, blockState);
@@ -82,6 +86,8 @@ public class JungleOfferingPedestalBlockEntity extends BlockEntity implements Ge
                     this.worldPosition.getY() + 1.25D,
                     this.worldPosition.getZ() + 0.5D,
                     18, 0.25D, 0.15D, 0.25D, 0.02D);
+            this.getMasterController(serverLevel)
+                    .ifPresent(masterController -> masterController.setOfferingAccepted(serverLevel, this.worldPosition));
         }
     }
 
@@ -118,10 +124,22 @@ public class JungleOfferingPedestalBlockEntity extends BlockEntity implements Ge
 
     public ItemStack removeDisplayedItem() {
         ItemStack stack = this.getDisplayedItem().copy();
+        boolean claimedTrialReward = !stack.isEmpty()
+                && stack.is(HPItems.WILDROOT_KEY.get())
+                && this.trialMode
+                && this.protectedMode
+                && this.accepted;
+
         this.items.set(0, ItemStack.EMPTY);
         this.transformTicks = 0;
         this.setChangedAndSync();
         this.playPlaceSound();
+
+        if (claimedTrialReward && this.level instanceof ServerLevel serverLevel) {
+            this.getMasterController(serverLevel)
+                    .ifPresent(masterController -> masterController.startRewardReset(serverLevel, this.worldPosition));
+        }
+
         return stack;
     }
 
@@ -154,6 +172,32 @@ public class JungleOfferingPedestalBlockEntity extends BlockEntity implements Ge
         this.protectedMode = protectedMode;
         this.setChangedAndSync();
     }
+
+    public void setMasterControllerPos(@Nullable BlockPos masterControllerPos) {
+        this.masterControllerPos = masterControllerPos == null ? null : masterControllerPos.immutable();
+        this.setChangedAndSync();
+    }
+
+    private Optional<JungleTrialMasterControllerBlockEntity> getMasterController(ServerLevel serverLevel) {
+        if (this.masterControllerPos != null) {
+            BlockEntity blockEntity = serverLevel.getBlockEntity(this.masterControllerPos);
+            if (blockEntity instanceof JungleTrialMasterControllerBlockEntity masterController) {
+                return Optional.of(masterController);
+            }
+        }
+
+        return JungleTrialMasterControllerBlockEntity.findNearest(serverLevel, this.worldPosition);
+    }
+
+    public void resetForTrial() {
+        this.items.set(0, ItemStack.EMPTY);
+        this.trialMode = false;
+        this.protectedMode = true;
+        this.accepted = false;
+        this.transformTicks = 0;
+        this.setChangedAndSync();
+    }
+
 
     public void toggleTrialMode() {
         this.trialMode = !this.trialMode;
@@ -191,6 +235,9 @@ public class JungleOfferingPedestalBlockEntity extends BlockEntity implements Ge
         tag.putBoolean("ProtectedMode", this.protectedMode);
         tag.putBoolean("Accepted", this.accepted);
         tag.putInt("TransformTicks", this.transformTicks);
+        if (this.masterControllerPos != null) {
+            tag.putLong("MasterControllerPos", this.masterControllerPos.asLong());
+        }
     }
 
     @Override
@@ -202,6 +249,7 @@ public class JungleOfferingPedestalBlockEntity extends BlockEntity implements Ge
         this.protectedMode = tag.getBoolean("ProtectedMode");
         this.accepted = tag.getBoolean("Accepted");
         this.transformTicks = tag.getInt("TransformTicks");
+        this.masterControllerPos = tag.contains("MasterControllerPos") ? BlockPos.of(tag.getLong("MasterControllerPos")) : null;
     }
 
     @Override

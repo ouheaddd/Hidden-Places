@@ -107,5 +107,7 @@
   "message.hidden_places.jungle_offering_pedestal.occupied": "The pedestal is already holding an offering.",
   "block.hidden_places.jungle_path_tile": "Jungle Path Tile",
   "item.hidden_places.jungle_path_trial_placer": "Jungle Path Trial Placer",
-  "block.hidden_places.jungle_path_controller": "Jungle Path Controller"
+  "block.hidden_places.jungle_path_controller": "Jungle Path Controller",
+  "item.hidden_places.jungle_trial_room_placer": "Jungle Trial Room Placer",
+  "block.hidden_places.jungle_trial_master_controller": "Jungle Trial Master Controller"
 }

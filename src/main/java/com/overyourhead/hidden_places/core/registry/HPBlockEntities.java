@@ -4,6 +4,7 @@ import com.overyourhead.hidden_places.HiddenPlacesMod;
 import com.overyourhead.hidden_places.common.block.entity.FrostboundChestBlockEntity;
 import com.overyourhead.hidden_places.common.block.entity.JungleOfferingPedestalBlockEntity;
 import com.overyourhead.hidden_places.common.block.entity.JunglePathControllerBlockEntity;
+import com.overyourhead.hidden_places.common.block.entity.JungleTrialMasterControllerBlockEntity;
 import com.overyourhead.hidden_places.common.block.entity.MossgateChestBlockEntity;
 import com.overyourhead.hidden_places.common.block.entity.SunveilChestBlockEntity;
 import com.overyourhead.hidden_places.common.block.entity.WildrootChestBlockEntity;
@@ -40,6 +41,9 @@ public final class HPBlockEntities {
 
     public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<JunglePathControllerBlockEntity>> JUNGLE_PATH_CONTROLLER =
             register("jungle_path_controller", JunglePathControllerBlockEntity::new, HPBlocks.JUNGLE_PATH_CONTROLLER);
+
+    public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<JungleTrialMasterControllerBlockEntity>> JUNGLE_TRIAL_MASTER_CONTROLLER =
+            register("jungle_trial_master_controller", JungleTrialMasterControllerBlockEntity::new, HPBlocks.JUNGLE_TRIAL_MASTER_CONTROLLER);
 
     private HPBlockEntities() {
     }
