@@ -3,6 +3,7 @@ package com.overyourhead.hidden_places.core.registry;
 import com.overyourhead.hidden_places.HiddenPlacesMod;
 import com.overyourhead.hidden_places.common.entity.BloomletEntity;
 import com.overyourhead.hidden_places.common.entity.MossgateWayfinderEntity;
+import com.overyourhead.hidden_places.common.entity.SunveilWayfinderEntity;
 import com.overyourhead.hidden_places.common.entity.TestWayfinderEntity;
 import com.overyourhead.hidden_places.common.entity.projectile.BloomletPetalProjectileEntity;
 import net.minecraft.core.registries.Registries;
@@ -36,6 +37,15 @@ public final class HPEntities {
                     .updateInterval(3)
                     .build("mossgate_wayfinder"));
 
+    public static final DeferredHolder<EntityType<?>, EntityType<SunveilWayfinderEntity>> SUNVEIL_WAYFINDER =
+            ENTITY_TYPES.register("sunveil_wayfinder", () -> EntityType.Builder
+                    .of(SunveilWayfinderEntity::new, MobCategory.CREATURE)
+                    .sized(0.6F, 1.95F)
+                    .eyeHeight(1.74F)
+                    .clientTrackingRange(8)
+                    .updateInterval(3)
+                    .build("sunveil_wayfinder"));
+
     public static final DeferredHolder<EntityType<?>, EntityType<BloomletEntity>> BLOOMLET =
             ENTITY_TYPES.register("bloomlet", () -> EntityType.Builder
                     .of(BloomletEntity::new, MobCategory.CREATURE)
@@ -63,6 +73,7 @@ public final class HPEntities {
     public static void registerAttributes(EntityAttributeCreationEvent event) {
         event.put(TEST_WAYFINDER.get(), TestWayfinderEntity.createAttributes().build());
         event.put(MOSSGATE_WAYFINDER.get(), MossgateWayfinderEntity.createAttributes().build());
+        event.put(SUNVEIL_WAYFINDER.get(), SunveilWayfinderEntity.createAttributes().build());
         event.put(BLOOMLET.get(), BloomletEntity.createAttributes().build());
     }
 

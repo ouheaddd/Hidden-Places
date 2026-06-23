@@ -192,6 +192,11 @@ public class TestWayfinderEntity extends Monster implements GeoEntity {
         this.setDialogueNode(player, this.getProfile().completedNodeId());
     }
 
+    public void clearPlayerTraded(Player player) {
+        this.tradedPlayers.remove(player.getUUID());
+        this.setDialogueNode(player, this.getProfile().defaultNodeId());
+    }
+
     public void provoke(Player player) {
         if (!this.getProfile().canBecomeHostileFromDialogue() || this.hasPlayerTraded(player)) {
             return;

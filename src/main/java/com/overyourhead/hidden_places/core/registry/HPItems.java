@@ -5,6 +5,7 @@ import com.overyourhead.hidden_places.common.item.JungleMosaicPlacerItem;
 import com.overyourhead.hidden_places.common.item.JunglePathTrialPlacerItem;
 import com.overyourhead.hidden_places.common.item.JungleTrialRoomPlacerItem;
 import com.overyourhead.hidden_places.common.item.SealedSanctumMapItem;
+import com.overyourhead.hidden_places.common.item.SunveilTrialRoomPlacerItem;
 import net.minecraft.world.item.Item;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.neoforge.common.DeferredSpawnEggItem;
@@ -55,6 +56,9 @@ public final class HPItems {
     public static final DeferredItem<Item> JUNGLE_TRIAL_ROOM_PLACER =
             registerItem("jungle_trial_room_placer", () -> new JungleTrialRoomPlacerItem(new Item.Properties()));
 
+    public static final DeferredItem<Item> SUNVEIL_TRIAL_ROOM_PLACER =
+            registerItem("sunveil_trial_room_placer", () -> new SunveilTrialRoomPlacerItem(new Item.Properties()));
+
     public static final DeferredItem<DeferredSpawnEggItem> TEST_WAYFINDER_SPAWN_EGG =
             ITEMS.register("test_wayfinder_spawn_egg", () -> new DeferredSpawnEggItem(
                     HPEntities.TEST_WAYFINDER,
@@ -68,6 +72,14 @@ public final class HPItems {
                     HPEntities.MOSSGATE_WAYFINDER,
                     0x2F4A2D,
                     0xD9C89A,
+                    new Item.Properties()
+            ));
+
+    public static final DeferredItem<DeferredSpawnEggItem> SUNVEIL_WAYFINDER_SPAWN_EGG =
+            ITEMS.register("sunveil_wayfinder_spawn_egg", () -> new DeferredSpawnEggItem(
+                    HPEntities.SUNVEIL_WAYFINDER,
+                    0xB86D24,
+                    0xE8C15E,
                     new Item.Properties()
             ));
 

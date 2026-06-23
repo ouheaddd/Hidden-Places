@@ -88,7 +88,9 @@ public class TestWayfinderDialogueScreen extends Screen {
             return;
         }
 
-        if (choice.action() == WayfinderDialogueAction.START_FIGHT || choice.action() == WayfinderDialogueAction.CLOSE) {
+        if (choice.action() == WayfinderDialogueAction.START_FIGHT
+                || choice.action() == WayfinderDialogueAction.START_SUNVEIL_TRIAL
+                || choice.action() == WayfinderDialogueAction.CLOSE) {
             this.suppressClosePacket = true;
             Minecraft.getInstance().setScreen(null);
             return;

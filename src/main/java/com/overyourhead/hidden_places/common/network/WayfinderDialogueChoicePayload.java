@@ -2,6 +2,7 @@ package com.overyourhead.hidden_places.common.network;
 
 import com.overyourhead.hidden_places.HiddenPlacesMod;
 import com.overyourhead.hidden_places.common.entity.TestWayfinderEntity;
+import com.overyourhead.hidden_places.common.entity.SunveilWayfinderEntity;
 import com.overyourhead.hidden_places.common.npc.WayfinderDialogueAction;
 import com.overyourhead.hidden_places.common.npc.WayfinderDialogueChoice;
 import com.overyourhead.hidden_places.common.npc.WayfinderDialogueNode;
@@ -96,6 +97,11 @@ public record WayfinderDialogueChoicePayload(int entityId, int choiceId) impleme
         if (action == WayfinderDialogueAction.COMPLETE) {
             wayfinder.setDialogueNode(player, wayfinder.getProfile().completedNodeId());
             wayfinder.startConversation(player);
+            return;
+        }
+
+        if (action == WayfinderDialogueAction.START_SUNVEIL_TRIAL && wayfinder instanceof SunveilWayfinderEntity sunveilWayfinder) {
+            sunveilWayfinder.startTrialFor(player);
             return;
         }
 

@@ -32,6 +32,9 @@ public final class HPSoundEvents {
     public static final DeferredHolder<SoundEvent, SoundEvent> BLOOMLET_IDLE =
             registerSound("entity.bloomlet.idle");
 
+    public static final DeferredHolder<SoundEvent, SoundEvent> SUNVEIL_FLUTE_LOOP =
+            registerSound("entity.sunveil_wayfinder.flute_loop");
+
     private HPSoundEvents() {
     }
 

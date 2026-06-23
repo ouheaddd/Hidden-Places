@@ -24,6 +24,16 @@ public enum WayfinderProfile {
             WayfinderTradeOffer.MOSSGATE_KEY_FOR_TORCHFLOWER,
             false,
             mossgateDialogue()
+    ),
+    SUNVEIL_WAYFINDER(
+            "sunveil_wayfinder",
+            "intro",
+            "trial_completed",
+            null,
+            null,
+            null,
+            false,
+            sunveilDialogue()
     );
 
     private final String translationKey;
@@ -182,6 +192,33 @@ public enum WayfinderProfile {
                 WayfinderDialogueChoice.close("option.leave")
         )));
         nodes.put("trade_completed", new WayfinderDialogueNode("trade_completed", "reply.trade_completed", List.of(
+                WayfinderDialogueChoice.close("option.leave")
+        )));
+        return nodes;
+    }
+
+    private static Map<String, WayfinderDialogueNode> sunveilDialogue() {
+        Map<String, WayfinderDialogueNode> nodes = new LinkedHashMap<>();
+        nodes.put("intro", new WayfinderDialogueNode("intro", "intro", List.of(
+                WayfinderDialogueChoice.gotoNode("option.who", "who"),
+                WayfinderDialogueChoice.gotoNode("option.ask_trial", "ask_trial"),
+                WayfinderDialogueChoice.close("option.leave")
+        )));
+        nodes.put("who", new WayfinderDialogueNode("who", "reply.who", List.of(
+                WayfinderDialogueChoice.gotoNode("option.ask_trial", "ask_trial"),
+                WayfinderDialogueChoice.close("option.leave")
+        )));
+        nodes.put("ask_trial", new WayfinderDialogueNode("ask_trial", "reply.ask_trial", List.of(
+                WayfinderDialogueChoice.startSunveilTrial("option.ready"),
+                WayfinderDialogueChoice.close("option.leave")
+        )));
+        nodes.put("trial_started", new WayfinderDialogueNode("trial_started", "reply.trial_started", List.of(
+                WayfinderDialogueChoice.close("option.leave")
+        )));
+        nodes.put("trial_running", new WayfinderDialogueNode("trial_running", "reply.trial_running", List.of(
+                WayfinderDialogueChoice.close("option.leave")
+        )));
+        nodes.put("trial_completed", new WayfinderDialogueNode("trial_completed", "reply.trial_completed", List.of(
                 WayfinderDialogueChoice.close("option.leave")
         )));
         return nodes;

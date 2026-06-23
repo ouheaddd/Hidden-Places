@@ -25,6 +25,10 @@ public record WayfinderDialogueChoice(
         return new WayfinderDialogueChoice(textTranslationSuffix, WayfinderDialogueAction.COMPLETE, null);
     }
 
+    public static WayfinderDialogueChoice startSunveilTrial(String textTranslationSuffix) {
+        return new WayfinderDialogueChoice(textTranslationSuffix, WayfinderDialogueAction.START_SUNVEIL_TRIAL, null);
+    }
+
     public String textTranslationKey(WayfinderProfile profile) {
         return "screen.hidden_places." + profile.translationKey() + "." + this.textTranslationSuffix;
     }

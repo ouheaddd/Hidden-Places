@@ -8,6 +8,8 @@ import com.overyourhead.hidden_places.common.block.JunglePathTileBlock;
 import com.overyourhead.hidden_places.common.block.JungleTrialMasterControllerBlock;
 import com.overyourhead.hidden_places.common.block.JungleOfferingPedestalBlock;
 import com.overyourhead.hidden_places.common.block.MossgateChestBlock;
+import com.overyourhead.hidden_places.common.block.SunveilSpawnMarkerBlock;
+import com.overyourhead.hidden_places.common.block.SunveilTrialControllerBlock;
 import com.overyourhead.hidden_places.common.block.SunveilChestBlock;
 import com.overyourhead.hidden_places.common.block.WildrootChestBlock;
 import net.minecraft.world.item.BlockItem;
@@ -70,6 +72,16 @@ public final class HPBlocks {
     public static final DeferredBlock<JungleTrialMasterControllerBlock> JUNGLE_TRIAL_MASTER_CONTROLLER = registerBlockWithoutItem(
             "jungle_trial_master_controller",
             () -> new JungleTrialMasterControllerBlock(JungleTrialMasterControllerBlock.createProperties())
+    );
+
+    public static final DeferredBlock<SunveilSpawnMarkerBlock> SUNVEIL_SPAWN_MARKER = registerBlockWithoutItem(
+            "sunveil_spawn_marker",
+            () -> new SunveilSpawnMarkerBlock(SunveilSpawnMarkerBlock.createProperties())
+    );
+
+    public static final DeferredBlock<SunveilTrialControllerBlock> SUNVEIL_TRIAL_CONTROLLER = registerBlockWithoutItem(
+            "sunveil_trial_controller",
+            () -> new SunveilTrialControllerBlock(SunveilTrialControllerBlock.createProperties())
     );
 
     /*

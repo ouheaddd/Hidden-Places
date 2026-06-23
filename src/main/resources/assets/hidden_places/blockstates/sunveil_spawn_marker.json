@@ -1,0 +1,7 @@
+{
+  "variants": {
+    "": {
+      "model": "hidden_places:block/sunveil_spawn_marker"
+    }
+  }
+}

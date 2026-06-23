@@ -5,5 +5,6 @@ public enum WayfinderDialogueAction {
     OPEN_TRADE,
     START_FIGHT,
     CLOSE,
-    COMPLETE
+    COMPLETE,
+    START_SUNVEIL_TRIAL
 }

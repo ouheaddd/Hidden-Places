@@ -9,6 +9,7 @@ import com.overyourhead.hidden_places.client.renderer.JungleOfferingPedestalRend
 import com.overyourhead.hidden_places.client.renderer.MossgateChestRenderer;
 import com.overyourhead.hidden_places.client.renderer.MossgateWayfinderRenderer;
 import com.overyourhead.hidden_places.client.renderer.SunveilChestRenderer;
+import com.overyourhead.hidden_places.client.renderer.SunveilWayfinderRenderer;
 import com.overyourhead.hidden_places.client.renderer.TestWayfinderRenderer;
 import com.overyourhead.hidden_places.client.renderer.WildrootChestRenderer;
 import com.overyourhead.hidden_places.client.screen.FrostboundChestScreen;
@@ -55,6 +56,7 @@ public final class HPClientEvents {
 
         event.registerEntityRenderer(HPEntities.TEST_WAYFINDER.get(), TestWayfinderRenderer::new);
         event.registerEntityRenderer(HPEntities.MOSSGATE_WAYFINDER.get(), MossgateWayfinderRenderer::new);
+        event.registerEntityRenderer(HPEntities.SUNVEIL_WAYFINDER.get(), SunveilWayfinderRenderer::new);
         event.registerEntityRenderer(HPEntities.BLOOMLET.get(), BloomletRenderer::new);
         event.registerEntityRenderer(HPEntities.BLOOMLET_PETAL_PROJECTILE.get(), BloomletPetalProjectileRenderer::new);
     }

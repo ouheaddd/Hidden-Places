@@ -6,6 +6,7 @@ import com.overyourhead.hidden_places.common.block.entity.JungleOfferingPedestal
 import com.overyourhead.hidden_places.common.block.entity.JunglePathControllerBlockEntity;
 import com.overyourhead.hidden_places.common.block.entity.JungleTrialMasterControllerBlockEntity;
 import com.overyourhead.hidden_places.common.block.entity.MossgateChestBlockEntity;
+import com.overyourhead.hidden_places.common.block.entity.SunveilTrialControllerBlockEntity;
 import com.overyourhead.hidden_places.common.block.entity.SunveilChestBlockEntity;
 import com.overyourhead.hidden_places.common.block.entity.WildrootChestBlockEntity;
 import net.minecraft.core.registries.Registries;
@@ -44,6 +45,9 @@ public final class HPBlockEntities {
 
     public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<JungleTrialMasterControllerBlockEntity>> JUNGLE_TRIAL_MASTER_CONTROLLER =
             register("jungle_trial_master_controller", JungleTrialMasterControllerBlockEntity::new, HPBlocks.JUNGLE_TRIAL_MASTER_CONTROLLER);
+
+    public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<SunveilTrialControllerBlockEntity>> SUNVEIL_TRIAL_CONTROLLER =
+            register("sunveil_trial_controller", SunveilTrialControllerBlockEntity::new, HPBlocks.SUNVEIL_TRIAL_CONTROLLER);
 
     private HPBlockEntities() {
     }
