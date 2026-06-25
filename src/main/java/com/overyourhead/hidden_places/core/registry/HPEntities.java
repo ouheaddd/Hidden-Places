@@ -2,6 +2,7 @@ package com.overyourhead.hidden_places.core.registry;
 
 import com.overyourhead.hidden_places.HiddenPlacesMod;
 import com.overyourhead.hidden_places.common.entity.BloomletEntity;
+import com.overyourhead.hidden_places.common.entity.MirageCreeperEntity;
 import com.overyourhead.hidden_places.common.entity.MossgateWayfinderEntity;
 import com.overyourhead.hidden_places.common.entity.SunveilWayfinderEntity;
 import com.overyourhead.hidden_places.common.entity.TestWayfinderEntity;
@@ -55,6 +56,17 @@ public final class HPEntities {
                     .updateInterval(3)
                     .build("bloomlet"));
 
+
+
+    public static final DeferredHolder<EntityType<?>, EntityType<MirageCreeperEntity>> MIRAGE_CREEPER =
+            ENTITY_TYPES.register("mirage_creeper", () -> EntityType.Builder
+                    .of(MirageCreeperEntity::new, MobCategory.MONSTER)
+                    .sized(0.6F, 1.7F)
+                    .eyeHeight(1.45F)
+                    .clientTrackingRange(8)
+                    .updateInterval(3)
+                    .build("mirage_creeper"));
+
     public static final DeferredHolder<EntityType<?>, EntityType<BloomletPetalProjectileEntity>> BLOOMLET_PETAL_PROJECTILE =
             ENTITY_TYPES.register("bloomlet_petal_projectile", () -> EntityType.Builder
                     .<BloomletPetalProjectileEntity>of(BloomletPetalProjectileEntity::new, MobCategory.MISC)
@@ -75,6 +87,7 @@ public final class HPEntities {
         event.put(MOSSGATE_WAYFINDER.get(), MossgateWayfinderEntity.createAttributes().build());
         event.put(SUNVEIL_WAYFINDER.get(), SunveilWayfinderEntity.createAttributes().build());
         event.put(BLOOMLET.get(), BloomletEntity.createAttributes().build());
+        event.put(MIRAGE_CREEPER.get(), MirageCreeperEntity.createAttributes().build());
     }
 
     public static void registerSpawnPlacements(RegisterSpawnPlacementsEvent event) {

@@ -2,7 +2,7 @@
   "parent": "minecraft:block/block",
   "textures": {
     "particle": "minecraft:block/mossy_stone_bricks",
-    "side": "minecraft:block/mossy_stone_bricks",
+    "side": "hidden_places:block/jungle_mosaic_side",
     "front": "hidden_places:block/jungle_mosaic/piece_13"
   },
   "elements": [

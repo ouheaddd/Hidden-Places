@@ -128,5 +128,7 @@
   "screen.hidden_places.sunveil_wayfinder.reply.trial_running": "Quiet. The song is already being played.",
   "screen.hidden_places.sunveil_wayfinder.reply.trial_completed": "You have already endured my song. The Sunveil Key was earned.",
   "bossbar.hidden_places.sunveil_trial": "Sunveil Trial",
-  "bossbar.hidden_places.sunveil_trial.progress": "Sunveil Trial: %s / %s"
+  "bossbar.hidden_places.sunveil_trial.progress": "Sunveil Trial: %s / %s",
+  "entity.hidden_places.mirage_creeper": "Mirage Creeper",
+  "item.hidden_places.mirage_creeper_spawn_egg": "Mirage Creeper Spawn Egg"
 }

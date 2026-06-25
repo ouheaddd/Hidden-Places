@@ -91,6 +91,15 @@ public final class HPItems {
                     new Item.Properties()
             ));
 
+
+    public static final DeferredItem<DeferredSpawnEggItem> MIRAGE_CREEPER_SPAWN_EGG =
+            ITEMS.register("mirage_creeper_spawn_egg", () -> new DeferredSpawnEggItem(
+                    HPEntities.MIRAGE_CREEPER,
+                    0xC49A5A,
+                    0x3E2B1B,
+                    new Item.Properties()
+            ));
+
     private HPItems() {
     }
 
