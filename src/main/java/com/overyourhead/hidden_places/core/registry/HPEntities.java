@@ -4,6 +4,7 @@ import com.overyourhead.hidden_places.HiddenPlacesMod;
 import com.overyourhead.hidden_places.common.entity.BloomletEntity;
 import com.overyourhead.hidden_places.common.entity.MirageCreeperEntity;
 import com.overyourhead.hidden_places.common.entity.MossgateWayfinderEntity;
+import com.overyourhead.hidden_places.common.entity.ParchedSkeletonRemainsEntity;
 import com.overyourhead.hidden_places.common.entity.SunveilWayfinderEntity;
 import com.overyourhead.hidden_places.common.entity.TestWayfinderEntity;
 import com.overyourhead.hidden_places.common.entity.projectile.BloomletPetalProjectileEntity;
@@ -66,6 +67,15 @@ public final class HPEntities {
                     .clientTrackingRange(8)
                     .updateInterval(3)
                     .build("mirage_creeper"));
+
+
+    public static final DeferredHolder<EntityType<?>, EntityType<ParchedSkeletonRemainsEntity>> PARCHED_SKELETON_REMAINS =
+            ENTITY_TYPES.register("parched_skeleton_remains", () -> EntityType.Builder
+                    .<ParchedSkeletonRemainsEntity>of(ParchedSkeletonRemainsEntity::new, MobCategory.MISC)
+                    .sized(1.45F, 0.32F)
+                    .clientTrackingRange(8)
+                    .updateInterval(10)
+                    .build("parched_skeleton_remains"));
 
     public static final DeferredHolder<EntityType<?>, EntityType<BloomletPetalProjectileEntity>> BLOOMLET_PETAL_PROJECTILE =
             ENTITY_TYPES.register("bloomlet_petal_projectile", () -> EntityType.Builder

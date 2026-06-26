@@ -132,5 +132,14 @@
   "entity.hidden_places.mirage_creeper": "Mirage Creeper",
   "item.hidden_places.mirage_creeper_spawn_egg": "Mirage Creeper Spawn Egg",
   "item.hidden_places.sanctum_seeker": "Sanctum Seeker",
-  "message.hidden_places.sanctum_seeker.not_found": "The Sanctum Seeker finds no sealed place nearby."
+  "message.hidden_places.sanctum_seeker.not_found": "The Sanctum Seeker finds no sealed place nearby.",
+  "entity.hidden_places.parched_skeleton_remains": "Parched Skeleton Remains",
+  "item.hidden_places.parched_skeleton_remains": "Parched Skeleton Remains",
+  "message.hidden_places.parched_skeleton_remains.selected": "Skeleton remains variant: %s",
+  "message.hidden_places.parched_skeleton_remains.variant.auto": "Auto",
+  "message.hidden_places.parched_skeleton_remains.floor_or_ceiling": "Place this on a floor or ceiling.",
+  "message.hidden_places.parched_skeleton_remains.ceiling_only": "Variant #3 hangs from the ceiling. Place it on the underside of a block.",
+  "message.hidden_places.parched_skeleton_remains.bad_support": "The remains need a sturdy floor or ceiling.",
+  "tooltip.hidden_places.parched_skeleton_remains.usage": "Right-click floor: place lying remains. Right-click ceiling: place hanging remains. Shift-right-click: switch variant.",
+  "tooltip.hidden_places.parched_skeleton_remains.selected": "Selected: %s"
 }

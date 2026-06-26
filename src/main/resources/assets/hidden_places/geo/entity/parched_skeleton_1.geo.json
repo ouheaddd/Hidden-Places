@@ -1,0 +1,189 @@
+{
+  "format_version": "1.12.0",
+  "minecraft:geometry": [
+    {
+      "description": {
+        "identifier": "geometry.parched_skeleton_1",
+        "texture_width": 64,
+        "texture_height": 64,
+        "visible_bounds_width": 3,
+        "visible_bounds_height": 1,
+        "visible_bounds_offset": [
+          0,
+          0.25,
+          0
+        ]
+      },
+      "bones": [
+        {
+          "name": "root",
+          "pivot": [
+            0,
+            0,
+            0
+          ],
+          "rotation": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "name": "pile",
+          "parent": "root",
+          "pivot": [
+            0,
+            0,
+            0
+          ],
+          "cubes": [
+            {
+              "origin": [
+                -12,
+                0,
+                -2
+              ],
+              "size": [
+                24,
+                2,
+                4
+              ],
+              "uv": [
+                0,
+                0
+              ]
+            },
+            {
+              "origin": [
+                -8,
+                2,
+                -5
+              ],
+              "size": [
+                4,
+                3,
+                10
+              ],
+              "uv": [
+                0,
+                8
+              ]
+            },
+            {
+              "origin": [
+                -2,
+                2,
+                -6
+              ],
+              "size": [
+                4,
+                3,
+                12
+              ],
+              "uv": [
+                0,
+                8
+              ]
+            },
+            {
+              "origin": [
+                4,
+                2,
+                -5
+              ],
+              "size": [
+                4,
+                3,
+                10
+              ],
+              "uv": [
+                0,
+                8
+              ]
+            },
+            {
+              "origin": [
+                10,
+                1,
+                -4
+              ],
+              "size": [
+                5,
+                5,
+                5
+              ],
+              "uv": [
+                24,
+                0
+              ]
+            },
+            {
+              "origin": [
+                -16,
+                0,
+                3
+              ],
+              "size": [
+                9,
+                2,
+                2
+              ],
+              "uv": [
+                0,
+                16
+              ]
+            },
+            {
+              "origin": [
+                -16,
+                0,
+                -5
+              ],
+              "size": [
+                9,
+                2,
+                2
+              ],
+              "uv": [
+                0,
+                16
+              ]
+            },
+            {
+              "origin": [
+                7,
+                0,
+                5
+              ],
+              "size": [
+                10,
+                2,
+                2
+              ],
+              "uv": [
+                0,
+                16
+              ]
+            },
+            {
+              "origin": [
+                7,
+                0,
+                -7
+              ],
+              "size": [
+                10,
+                2,
+                2
+              ],
+              "uv": [
+                0,
+                16
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

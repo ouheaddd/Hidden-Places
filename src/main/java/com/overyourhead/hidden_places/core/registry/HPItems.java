@@ -4,6 +4,7 @@ import com.overyourhead.hidden_places.HiddenPlacesMod;
 import com.overyourhead.hidden_places.common.item.JungleMosaicPlacerItem;
 import com.overyourhead.hidden_places.common.item.JunglePathTrialPlacerItem;
 import com.overyourhead.hidden_places.common.item.JungleTrialRoomPlacerItem;
+import com.overyourhead.hidden_places.common.item.ParchedSkeletonRemainsItem;
 import com.overyourhead.hidden_places.common.item.SealedSanctumMapItem;
 import com.overyourhead.hidden_places.common.item.SanctumSeekerItem;
 import com.overyourhead.hidden_places.common.item.SunveilTrialRoomPlacerItem;
@@ -62,6 +63,10 @@ public final class HPItems {
 
     public static final DeferredItem<Item> SUNVEIL_TRIAL_ROOM_PLACER =
             registerItem("sunveil_trial_room_placer", () -> new SunveilTrialRoomPlacerItem(new Item.Properties()));
+
+
+    public static final DeferredItem<Item> PARCHED_SKELETON_REMAINS =
+            registerItem("parched_skeleton_remains", () -> new ParchedSkeletonRemainsItem(new Item.Properties()));
 
     public static final DeferredItem<DeferredSpawnEggItem> TEST_WAYFINDER_SPAWN_EGG =
             ITEMS.register("test_wayfinder_spawn_egg", () -> new DeferredSpawnEggItem(

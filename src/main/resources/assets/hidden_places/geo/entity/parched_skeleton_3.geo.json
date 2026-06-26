@@ -1,0 +1,143 @@
+{
+  "format_version": "1.12.0",
+  "minecraft:geometry": [
+    {
+      "description": {
+        "identifier": "geometry.parched_skeleton_3",
+        "texture_width": 64,
+        "texture_height": 64,
+        "visible_bounds_width": 2,
+        "visible_bounds_height": 2,
+        "visible_bounds_offset": [
+          0,
+          -0.75,
+          0
+        ]
+      },
+      "bones": [
+        {
+          "name": "root",
+          "pivot": [
+            0,
+            0,
+            0
+          ],
+          "cubes": [
+            {
+              "origin": [
+                -3,
+                -17,
+                -2
+              ],
+              "size": [
+                6,
+                12,
+                4
+              ],
+              "uv": [
+                0,
+                0
+              ]
+            },
+            {
+              "origin": [
+                -4,
+                -23,
+                -4
+              ],
+              "size": [
+                8,
+                6,
+                8
+              ],
+              "uv": [
+                24,
+                0
+              ]
+            },
+            {
+              "origin": [
+                -7,
+                -14,
+                -2
+              ],
+              "size": [
+                3,
+                10,
+                3
+              ],
+              "uv": [
+                0,
+                16
+              ]
+            },
+            {
+              "origin": [
+                4,
+                -14,
+                -2
+              ],
+              "size": [
+                3,
+                10,
+                3
+              ],
+              "uv": [
+                0,
+                16
+              ]
+            },
+            {
+              "origin": [
+                -4,
+                -27,
+                -1
+              ],
+              "size": [
+                3,
+                8,
+                3
+              ],
+              "uv": [
+                0,
+                16
+              ]
+            },
+            {
+              "origin": [
+                1,
+                -27,
+                -1
+              ],
+              "size": [
+                3,
+                8,
+                3
+              ],
+              "uv": [
+                0,
+                16
+              ]
+            },
+            {
+              "origin": [
+                -1,
+                -4,
+                -1
+              ],
+              "size": [
+                2,
+                4,
+                2
+              ],
+              "uv": [
+                12,
+                16
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
