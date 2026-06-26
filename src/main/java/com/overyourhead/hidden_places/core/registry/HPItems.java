@@ -5,6 +5,7 @@ import com.overyourhead.hidden_places.common.item.JungleMosaicPlacerItem;
 import com.overyourhead.hidden_places.common.item.JunglePathTrialPlacerItem;
 import com.overyourhead.hidden_places.common.item.JungleTrialRoomPlacerItem;
 import com.overyourhead.hidden_places.common.item.SealedSanctumMapItem;
+import com.overyourhead.hidden_places.common.item.SanctumSeekerItem;
 import com.overyourhead.hidden_places.common.item.SunveilTrialRoomPlacerItem;
 import net.minecraft.world.item.Item;
 import net.neoforged.bus.api.IEventBus;
@@ -46,6 +47,9 @@ public final class HPItems {
 
     public static final DeferredItem<Item> SEALED_SANCTUM_MAP =
             registerItem("sealed_sanctum_map", () -> new SealedSanctumMapItem(new Item.Properties()));
+
+    public static final DeferredItem<Item> SANCTUM_SEEKER =
+            registerItem("sanctum_seeker", () -> new SanctumSeekerItem(new Item.Properties()));
 
     public static final DeferredItem<Item> JUNGLE_MOSAIC_PLACER =
             registerItem("jungle_mosaic_placer", () -> new JungleMosaicPlacerItem(new Item.Properties()));

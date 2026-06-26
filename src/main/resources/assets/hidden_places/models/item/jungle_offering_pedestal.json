@@ -1,6 +1,3 @@
 {
-  "parent": "minecraft:item/generated",
-  "textures": {
-    "layer0": "hidden_places:item/jungle_offering_pedestal"
-  }
+  "parent": "hidden_places:block/jungle_offering_pedestal_item"
 }

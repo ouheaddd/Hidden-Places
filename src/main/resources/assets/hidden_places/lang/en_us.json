@@ -130,5 +130,7 @@
   "bossbar.hidden_places.sunveil_trial": "Sunveil Trial",
   "bossbar.hidden_places.sunveil_trial.progress": "Sunveil Trial: %s / %s",
   "entity.hidden_places.mirage_creeper": "Mirage Creeper",
-  "item.hidden_places.mirage_creeper_spawn_egg": "Mirage Creeper Spawn Egg"
+  "item.hidden_places.mirage_creeper_spawn_egg": "Mirage Creeper Spawn Egg",
+  "item.hidden_places.sanctum_seeker": "Sanctum Seeker",
+  "message.hidden_places.sanctum_seeker.not_found": "The Sanctum Seeker finds no sealed place nearby."
 }
