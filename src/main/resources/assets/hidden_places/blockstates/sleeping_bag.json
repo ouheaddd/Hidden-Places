@@ -1,0 +1,21 @@
+{
+  "variants": {
+    "facing=south,part=foot,occupied=false": { "model": "hidden_places:block/sleeping_bag" },
+    "facing=south,part=foot,occupied=true": { "model": "hidden_places:block/sleeping_bag" },
+    "facing=west,part=foot,occupied=false": { "model": "hidden_places:block/sleeping_bag", "y": 90 },
+    "facing=west,part=foot,occupied=true": { "model": "hidden_places:block/sleeping_bag", "y": 90 },
+    "facing=north,part=foot,occupied=false": { "model": "hidden_places:block/sleeping_bag", "y": 180 },
+    "facing=north,part=foot,occupied=true": { "model": "hidden_places:block/sleeping_bag", "y": 180 },
+    "facing=east,part=foot,occupied=false": { "model": "hidden_places:block/sleeping_bag", "y": 270 },
+    "facing=east,part=foot,occupied=true": { "model": "hidden_places:block/sleeping_bag", "y": 270 },
+
+    "facing=south,part=head,occupied=false": { "model": "hidden_places:block/sleeping_bag_empty" },
+    "facing=south,part=head,occupied=true": { "model": "hidden_places:block/sleeping_bag_empty" },
+    "facing=west,part=head,occupied=false": { "model": "hidden_places:block/sleeping_bag_empty" },
+    "facing=west,part=head,occupied=true": { "model": "hidden_places:block/sleeping_bag_empty" },
+    "facing=north,part=head,occupied=false": { "model": "hidden_places:block/sleeping_bag_empty" },
+    "facing=north,part=head,occupied=true": { "model": "hidden_places:block/sleeping_bag_empty" },
+    "facing=east,part=head,occupied=false": { "model": "hidden_places:block/sleeping_bag_empty" },
+    "facing=east,part=head,occupied=true": { "model": "hidden_places:block/sleeping_bag_empty" }
+  }
+}

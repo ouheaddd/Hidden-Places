@@ -149,5 +149,10 @@
   "message.hidden_places.hearthbound_hat.teleported": "The Hearthbound Hat pulls you home. Cost: %s levels.",
   "message.hidden_places.hearthbound_hat.cooldown": "The Hearthbound Hat is cooling down. Wait %s seconds.",
   "key.hidden_places.activate_hearthbound_hat": "Activate Hearthbound Hat",
-  "key.categories.hidden_places": "Hidden Places"
+  "key.categories.hidden_places": "Hidden Places",
+  "block.hidden_places.sleeping_bag": "Sleeping Bag",
+  "message.hidden_places.sleeping_bag.occupied": "This sleeping bag is already occupied.",
+  "message.hidden_places.sleeping_bag.resting_until_night": "You rest until nightfall.",
+  "message.hidden_places.sleeping_bag.sleeping_until_morning": "You sleep until morning.",
+  "message.hidden_places.sleeping_bag.night_only": "You can only sleep in this sleeping bag at night."
 }
