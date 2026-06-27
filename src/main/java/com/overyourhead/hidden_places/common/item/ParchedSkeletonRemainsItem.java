@@ -1,8 +1,10 @@
 package com.overyourhead.hidden_places.common.item;
 
+import com.overyourhead.hidden_places.client.renderer.ParchedSkeletonRemainsItemRenderer;
 import com.overyourhead.hidden_places.common.entity.ParchedSkeletonRemainsEntity;
 import com.overyourhead.hidden_places.core.registry.HPEntities;
 import net.minecraft.ChatFormatting;
+import net.minecraft.client.renderer.BlockEntityWithoutLevelRenderer;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.component.DataComponents;
@@ -23,13 +25,22 @@ import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.Vec3;
+import software.bernie.geckolib.animatable.GeoItem;
+import software.bernie.geckolib.animatable.client.GeoRenderProvider;
+import software.bernie.geckolib.animatable.instance.AnimatableInstanceCache;
+import software.bernie.geckolib.animation.AnimatableManager;
+import software.bernie.geckolib.util.GeckoLibUtil;
 
 import java.util.List;
+import java.util.function.Consumer;
+import java.util.function.Supplier;
 
-public class ParchedSkeletonRemainsItem extends Item {
+public class ParchedSkeletonRemainsItem extends Item implements GeoItem {
     private static final String TAG_SELECTED_VARIANT = "SelectedVariant";
     private static final int AUTO_VARIANT = 0;
     private static final int[] CYCLE = new int[] {AUTO_VARIANT, 1, 2, 3, 4, 5};
+
+    private final AnimatableInstanceCache animatableInstanceCache = GeckoLibUtil.createInstanceCache(this);
 
     public ParchedSkeletonRemainsItem(Properties properties) {
         super(properties.stacksTo(16));
@@ -85,7 +96,10 @@ public class ParchedSkeletonRemainsItem extends Item {
         Vec3 click = context.getClickLocation();
         double x = clickedPos.getX() + 0.5D;
         double z = clickedPos.getZ() + 0.5D;
-        double y = ceiling ? clickedPos.getY() : clickedPos.getY() + 1.0D;
+        // Floor variants sit on top of the clicked block.
+        // Ceiling variant #3 is spawned lower so the model hangs under the block
+        // instead of being pushed up into/above the support block.
+        double y = ceiling ? clickedPos.getY() - 2.0D : clickedPos.getY() + 1.0D;
 
         remains.setPos(x, y, z);
         remains.setYRot(player != null ? player.getYRot() + 180.0F : 0.0F);
@@ -162,4 +176,32 @@ public class ParchedSkeletonRemainsItem extends Item {
         tooltip.add(Component.translatable("tooltip.hidden_places.parched_skeleton_remains.usage").withStyle(ChatFormatting.GRAY));
         tooltip.add(Component.translatable("tooltip.hidden_places.parched_skeleton_remains.selected", variantName(getSelectedVariant(stack))).withStyle(ChatFormatting.DARK_GRAY));
     }
+
+
+    @Override
+    public void createGeoRenderer(Consumer<GeoRenderProvider> consumer) {
+        consumer.accept(new GeoRenderProvider() {
+            private ParchedSkeletonRemainsItemRenderer renderer;
+
+            @Override
+            public BlockEntityWithoutLevelRenderer getGeoItemRenderer() {
+                if (this.renderer == null) {
+                    this.renderer = new ParchedSkeletonRemainsItemRenderer();
+                }
+
+                return this.renderer;
+            }
+        });
+    }
+
+    @Override
+    public void registerControllers(AnimatableManager.ControllerRegistrar controllers) {
+        // Static item. No animation for now.
+    }
+
+    @Override
+    public AnimatableInstanceCache getAnimatableInstanceCache() {
+        return this.animatableInstanceCache;
+    }
+
 }

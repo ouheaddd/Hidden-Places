@@ -1,76 +1,88 @@
 {
-  "parent": "minecraft:item/generated",
-  "textures": {
-    "layer0": "hidden_places:item/parched_skeleton_remains"
-  },
+  "parent": "builtin/entity",
+  "gui_light": "front",
   "display": {
     "thirdperson_righthand": {
-      "rotation": [
-        75,
-        45,
-        0
-      ],
       "translation": [
         0,
-        2.5,
-        0
+        -4,
+        -1
       ],
       "scale": [
-        0.5,
-        0.5,
-        0.5
+        0.45,
+        0.45,
+        0.45
+      ]
+    },
+    "thirdperson_lefthand": {
+      "translation": [
+        0,
+        -4,
+        -1
+      ],
+      "scale": [
+        0.45,
+        0.45,
+        0.45
       ]
     },
     "firstperson_righthand": {
-      "rotation": [
-        0,
-        45,
-        0
-      ],
       "translation": [
         0,
-        1.5,
+        -1,
         0
       ],
       "scale": [
-        0.65,
-        0.65,
-        0.65
+        0.45,
+        0.45,
+        0.45
       ]
     },
-    "gui": {
-      "rotation": [
-        30,
-        225,
-        0
-      ],
+    "firstperson_lefthand": {
       "translation": [
         0,
-        0,
+        -1,
         0
       ],
       "scale": [
-        0.85,
-        0.85,
-        0.85
+        0.45,
+        0.45,
+        0.45
       ]
     },
     "ground": {
       "translation": [
         0,
-        2,
+        0,
         0
       ],
       "scale": [
-        0.5,
-        0.5,
-        0.5
+        0.45,
+        0.45,
+        0.45
+      ]
+    },
+    "gui": {
+      "rotation": [
+        0,
+        -150,
+        0
+      ],
+      "translation": [
+        -1,
+        -7,
+        0
+      ],
+      "scale": [
+        0.7,
+        0.7,
+        0.7
       ]
     },
     "fixed": {
-      "rotation": [
+      "translation": [
         0,
-        180,
+        -8,
         0
       ],
       "scale": [
