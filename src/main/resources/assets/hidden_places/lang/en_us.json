@@ -141,5 +141,13 @@
   "message.hidden_places.parched_skeleton_remains.ceiling_only": "Variant #3 hangs from the ceiling. Place it on the underside of a block.",
   "message.hidden_places.parched_skeleton_remains.bad_support": "The remains need a sturdy floor or ceiling.",
   "tooltip.hidden_places.parched_skeleton_remains.usage": "Right-click floor: place lying remains. Right-click ceiling: place hanging remains. Shift-right-click: switch variant.",
-  "tooltip.hidden_places.parched_skeleton_remains.selected": "Selected: %s"
+  "tooltip.hidden_places.parched_skeleton_remains.selected": "Selected: %s",
+  "item.hidden_places.hearthbound_hat": "Hearthbound Hat",
+  "tooltip.hidden_places.hearthbound_hat.usage": "Hold H for 3 seconds to return to your spawn point.",
+  "tooltip.hidden_places.hearthbound_hat.cost": "Costs 1 level per 1000 blocks, max 15 levels. Cross-dimension teleport costs 15 levels.",
+  "message.hidden_places.hearthbound_hat.not_enough_xp": "The Hearthbound Hat needs %s experience levels.",
+  "message.hidden_places.hearthbound_hat.teleported": "The Hearthbound Hat pulls you home. Cost: %s levels.",
+  "message.hidden_places.hearthbound_hat.cooldown": "The Hearthbound Hat is cooling down. Wait %s seconds.",
+  "key.hidden_places.activate_hearthbound_hat": "Activate Hearthbound Hat",
+  "key.categories.hidden_places": "Hidden Places"
 }

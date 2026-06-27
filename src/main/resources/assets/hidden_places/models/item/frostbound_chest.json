@@ -1,6 +1,396 @@
 {
-  "parent": "minecraft:item/generated",
+  "format_version": "1.21.11",
+  "credit": "Made with Blockbench",
+  "texture_size": [
+    128,
+    128
+  ],
   "textures": {
-    "layer0": "hidden_places:item/frostbound_chest"
-  }
+    "0": "block/frostbound_chest",
+    "particle": "block/frostbound_chest"
+  },
+  "elements": [
+    {
+      "from": [
+        6,
+        7,
+        -1
+      ],
+      "to": [
+        10,
+        11,
+        1
+      ],
+      "rotation": {
+        "angle": 0,
+        "axis": "y",
+        "origin": [
+          8,
+          9,
+          0
+        ]
+      },
+      "faces": {
+        "north": {
+          "uv": [
+            0.25,
+            6,
+            0.75,
+            6.5
+          ],
+          "texture": "#0"
+        },
+        "east": {
+          "uv": [
+            0,
+            6,
+            0.25,
+            6.5
+          ],
+          "texture": "#0"
+        },
+        "south": {
+          "uv": [
+            1,
+            6,
+            1.5,
+            6.5
+          ],
+          "texture": "#0"
+        },
+        "west": {
+          "uv": [
+            0.75,
+            6,
+            1,
+            6.5
+          ],
+          "texture": "#0"
+        },
+        "up": {
+          "uv": [
+            0.75,
+            6,
+            0.25,
+            5.75
+          ],
+          "texture": "#0"
+        },
+        "down": {
+          "uv": [
+            1.25,
+            5.75,
+            0.75,
+            6
+          ],
+          "texture": "#0"
+        }
+      }
+    },
+    {
+      "from": [
+        -3,
+        9,
+        0
+      ],
+      "to": [
+        19,
+        14,
+        16
+      ],
+      "rotation": {
+        "angle": 0,
+        "axis": "y",
+        "origin": [
+          8,
+          13.5,
+          8
+        ]
+      },
+      "faces": {
+        "north": {
+          "uv": [
+            2,
+            5.125,
+            4.75,
+            5.75
+          ],
+          "texture": "#0"
+        },
+        "east": {
+          "uv": [
+            0,
+            5.125,
+            2,
+            5.75
+          ],
+          "texture": "#0"
+        },
+        "south": {
+          "uv": [
+            6.75,
+            5.125,
+            9.5,
+            5.75
+          ],
+          "texture": "#0"
+        },
+        "west": {
+          "uv": [
+            4.75,
+            5.125,
+            6.75,
+            5.75
+          ],
+          "texture": "#0"
+        },
+        "up": {
+          "uv": [
+            4.75,
+            5.125,
+            2,
+            3.125
+          ],
+          "texture": "#0"
+        },
+        "down": {
+          "uv": [
+            7.5,
+            3.125,
+            4.75,
+            5.125
+          ],
+          "texture": "#0"
+        }
+      }
+    },
+    {
+      "from": [
+        -3,
+        0,
+        0
+      ],
+      "to": [
+        19,
+        9,
+        16
+      ],
+      "rotation": {
+        "angle": 0,
+        "axis": "y",
+        "origin": [
+          8,
+          4.5,
+          8
+        ]
+      },
+      "faces": {
+        "north": {
+          "uv": [
+            2,
+            2,
+            4.75,
+            3.125
+          ],
+          "texture": "#0"
+        },
+        "east": {
+          "uv": [
+            0,
+            2,
+            2,
+            3.125
+          ],
+          "texture": "#0"
+        },
+        "south": {
+          "uv": [
+            6.75,
+            2,
+            9.5,
+            3.125
+          ],
+          "texture": "#0"
+        },
+        "west": {
+          "uv": [
+            4.75,
+            2,
+            6.75,
+            3.125
+          ],
+          "texture": "#0"
+        },
+        "up": {
+          "uv": [
+            4.75,
+            2,
+            2,
+            0
+          ],
+          "texture": "#0"
+        },
+        "down": {
+          "uv": [
+            7.5,
+            0,
+            4.75,
+            2
+          ],
+          "texture": "#0"
+        }
+      }
+    }
+  ],
+  "display": {
+    "thirdperson_righthand": {
+      "rotation": [
+        70,
+        0,
+        0
+      ],
+      "translation": [
+        0,
+        -1,
+        1
+      ],
+      "scale": [
+        0.25,
+        0.25,
+        0.25
+      ]
+    },
+    "thirdperson_lefthand": {
+      "rotation": [
+        70,
+        0,
+        0
+      ],
+      "translation": [
+        0,
+        -1,
+        0
+      ],
+      "scale": [
+        0.25,
+        0.25,
+        0.25
+      ]
+    },
+    "firstperson_righthand": {
+      "translation": [
+        0,
+        0.5,
+        0
+      ],
+      "scale": [
+        0.25,
+        0.25,
+        0.25
+      ]
+    },
+    "firstperson_lefthand": {
+      "translation": [
+        0,
+        0.5,
+        0
+      ],
+      "scale": [
+        0.25,
+        0.25,
+        0.25
+      ]
+    },
+    "ground": {
+      "scale": [
+        0.25,
+        0.25,
+        0.25
+      ]
+    },
+    "gui": {
+      "rotation": [
+        25,
+        -150,
+        0
+      ],
+      "scale": [
+        0.5,
+        0.5,
+        0.5
+      ]
+    },
+    "fixed": {
+      "scale": [
+        0.5,
+        0.5,
+        0.5
+      ]
+    },
+    "on_shelf": {
+      "rotation": [
+        0,
+        -180,
+        0
+      ],
+      "scale": [
+        0.5,
+        0.5,
+        0.5
+      ]
+    }
+  },
+  "groups": [
+    {
+      "name": "chest",
+      "origin": [
+        8,
+        13.5,
+        8
+      ],
+      "scope": 0,
+      "color": 0,
+      "children": [
+        {
+          "name": "top",
+          "origin": [
+            8,
+            11.5,
+            8
+          ],
+          "scope": 0,
+          "color": 0,
+          "children": [
+            {
+              "name": "middle",
+              "origin": [
+                8,
+                9,
+                0
+              ],
+              "scope": 0,
+              "color": 0,
+              "children": [
+                0
+              ]
+            },
+            1
+          ]
+        },
+        {
+          "name": "bottom",
+          "origin": [
+            8,
+            4.5,
+            8
+          ],
+          "scope": 0,
+          "color": 0,
+          "children": [
+            2
+          ]
+        }
+      ]
+    }
+  ]
 }

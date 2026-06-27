@@ -40,5 +40,11 @@ public final class HPNetwork {
                 WayfinderTradePayload.STREAM_CODEC,
                 WayfinderTradePayload::handle
         );
+
+        registrar.playToServer(
+                HearthboundHatTeleportPayload.TYPE,
+                HearthboundHatTeleportPayload.STREAM_CODEC,
+                HearthboundHatTeleportPayload::handle
+        );
     }
 }

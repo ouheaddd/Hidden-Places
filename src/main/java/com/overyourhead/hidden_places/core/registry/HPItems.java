@@ -5,10 +5,13 @@ import com.overyourhead.hidden_places.common.item.JungleMosaicPlacerItem;
 import com.overyourhead.hidden_places.common.item.JunglePathTrialPlacerItem;
 import com.overyourhead.hidden_places.common.item.JungleTrialRoomPlacerItem;
 import com.overyourhead.hidden_places.common.item.ParchedSkeletonRemainsItem;
+import com.overyourhead.hidden_places.common.item.HearthboundHatItem;
 import com.overyourhead.hidden_places.common.item.SealedSanctumMapItem;
 import com.overyourhead.hidden_places.common.item.SanctumSeekerItem;
 import com.overyourhead.hidden_places.common.item.SunveilTrialRoomPlacerItem;
+import net.minecraft.core.Holder;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.item.Rarity;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.neoforge.common.DeferredSpawnEggItem;
 import net.neoforged.neoforge.registries.DeferredItem;
@@ -67,6 +70,15 @@ public final class HPItems {
 
     public static final DeferredItem<Item> PARCHED_SKELETON_REMAINS =
             registerItem("parched_skeleton_remains", () -> new ParchedSkeletonRemainsItem(new Item.Properties()));
+
+    public static final DeferredItem<Item> HEARTHBOUND_HAT =
+            registerItem("hearthbound_hat", () -> new HearthboundHatItem(
+                    Holder.direct(HPArmorMaterials.HEARTHBOUND_HAT),
+                    new Item.Properties()
+                            .stacksTo(1)
+                            .durability(165)
+                            .rarity(Rarity.UNCOMMON)
+            ));
 
     public static final DeferredItem<DeferredSpawnEggItem> TEST_WAYFINDER_SPAWN_EGG =
             ITEMS.register("test_wayfinder_spawn_egg", () -> new DeferredSpawnEggItem(

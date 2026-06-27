@@ -8,6 +8,8 @@ import net.minecraft.core.NonNullList;
 import net.minecraft.core.component.DataComponentMap;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.sounds.SoundEvents;
+import net.minecraft.sounds.SoundSource;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
@@ -31,7 +33,7 @@ import software.bernie.geckolib.animation.RawAnimation;
 import software.bernie.geckolib.util.GeckoLibUtil;
 
 public class MossgateChestBlockEntity extends RandomizableContainerBlockEntity implements GeoBlockEntity {
-    public static final int ROWS = 2;
+    public static final int ROWS = 4;
     public static final int COLUMNS = 9;
     public static final int CONTAINER_SIZE = ROWS * COLUMNS;
 
@@ -150,7 +152,16 @@ public class MossgateChestBlockEntity extends RandomizableContainerBlockEntity i
 
         BlockState state = this.getBlockState();
         if (state.hasProperty(MossgateChestBlock.OPEN) && state.getValue(MossgateChestBlock.OPEN) != open) {
-            level.setBlock(this.getBlockPos(), state.setValue(MossgateChestBlock.OPEN, open), Block.UPDATE_CLIENTS);
+            BlockPos pos = this.getBlockPos();
+            level.playSound(
+                    null,
+                    pos,
+                    open ? SoundEvents.CHEST_OPEN : SoundEvents.CHEST_CLOSE,
+                    SoundSource.BLOCKS,
+                    0.5F,
+                    level.random.nextFloat() * 0.1F + 0.9F
+            );
+            level.setBlock(pos, state.setValue(MossgateChestBlock.OPEN, open), Block.UPDATE_CLIENTS);
         }
     }
 

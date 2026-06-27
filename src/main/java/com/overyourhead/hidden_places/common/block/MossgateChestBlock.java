@@ -37,7 +37,8 @@ public class MossgateChestBlock extends BaseEntityBlock {
     public static final MapCodec<MossgateChestBlock> CODEC = simpleCodec(MossgateChestBlock::new);
     public static final DirectionProperty FACING = HorizontalDirectionalBlock.FACING;
     public static final BooleanProperty OPEN = BlockStateProperties.OPEN;
-    private static final VoxelShape SHAPE = Block.box(1.0D, 0.0D, 1.0D, 15.0D, 14.0D, 15.0D);
+    private static final VoxelShape SHAPE_NORTH_SOUTH = Block.box(-3.0D, 0.0D, 0.0D, 19.0D, 13.0D, 16.0D);
+    private static final VoxelShape SHAPE_EAST_WEST = Block.box(0.0D, 0.0D, -3.0D, 16.0D, 13.0D, 19.0D);
 
     public MossgateChestBlock(Properties properties) {
         super(properties);
@@ -66,7 +67,8 @@ public class MossgateChestBlock extends BaseEntityBlock {
 
     @Override
     protected VoxelShape getShape(BlockState state, net.minecraft.world.level.BlockGetter level, BlockPos pos, CollisionContext context) {
-        return SHAPE;
+        Direction facing = state.getValue(FACING);
+        return facing.getAxis() == Direction.Axis.X ? SHAPE_EAST_WEST : SHAPE_NORTH_SOUTH;
     }
 
     @Override
