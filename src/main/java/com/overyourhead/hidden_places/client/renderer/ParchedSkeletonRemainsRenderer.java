@@ -1,6 +1,7 @@
 package com.overyourhead.hidden_places.client.renderer;
 
 import com.mojang.blaze3d.vertex.PoseStack;
+import com.mojang.math.Axis;
 import com.overyourhead.hidden_places.client.model.ParchedSkeletonRemainsModel;
 import com.overyourhead.hidden_places.common.entity.ParchedSkeletonRemainsEntity;
 import net.minecraft.client.renderer.MultiBufferSource;
@@ -16,7 +17,8 @@ public class ParchedSkeletonRemainsRenderer extends GeoEntityRenderer<ParchedSke
     @Override
     public void render(ParchedSkeletonRemainsEntity entity, float entityYaw, float partialTick, PoseStack poseStack, MultiBufferSource bufferSource, int packedLight) {
         poseStack.pushPose();
-        super.render(entity, entityYaw, partialTick, poseStack, bufferSource, packedLight);
+        poseStack.mulPose(Axis.YP.rotationDegrees(entity.getPlacedYaw()));
+        super.render(entity, 0.0F, partialTick, poseStack, bufferSource, packedLight);
         poseStack.popPose();
     }
 }

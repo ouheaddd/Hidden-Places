@@ -22,6 +22,7 @@ import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.item.Item.TooltipContext;
 import net.minecraft.world.item.component.CustomData;
 import net.minecraft.world.item.context.UseOnContext;
+import net.minecraft.util.Mth;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.Vec3;
@@ -102,7 +103,8 @@ public class ParchedSkeletonRemainsItem extends Item implements GeoItem {
         double y = ceiling ? clickedPos.getY() - 2.0D : clickedPos.getY() + 1.0D;
 
         remains.setPos(x, y, z);
-        remains.setYRot(player != null ? player.getYRot() + 180.0F : 0.0F);
+        float placedYaw = player != null ? getSkeletonPlacedYaw(player) : 0.0F;
+        remains.setPlacedYaw(placedYaw);
         remains.setCeilingMounted(ceiling);
         remains.setVariant(ceiling ? ParchedSkeletonRemainsEntity.CEILING_VARIANT : resolveFloorVariant(level, stack));
         level.addFreshEntity(remains);
@@ -114,6 +116,19 @@ public class ParchedSkeletonRemainsItem extends Item implements GeoItem {
         }
 
         return InteractionResult.CONSUME;
+    }
+
+    private static float getSkeletonPlacedYaw(Player player) {
+        float yaw = Mth.wrapDegrees(player.getYRot());
+        Direction direction = Direction.fromYRot(yaw);
+
+        // The skeleton model has a 180-degree offset only on the north/south axis.
+        // East/west already faces correctly, so only flip Z-axis placements.
+        if (direction.getAxis() == Direction.Axis.Z) {
+            yaw = Mth.wrapDegrees(yaw + 180.0F);
+        }
+
+        return yaw;
     }
 
     @Override

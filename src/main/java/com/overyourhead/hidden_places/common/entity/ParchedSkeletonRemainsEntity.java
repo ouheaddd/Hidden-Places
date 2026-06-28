@@ -28,6 +28,7 @@ public class ParchedSkeletonRemainsEntity extends Entity implements GeoEntity {
 
     private static final EntityDataAccessor<Integer> DATA_VARIANT = SynchedEntityData.defineId(ParchedSkeletonRemainsEntity.class, EntityDataSerializers.INT);
     private static final EntityDataAccessor<Boolean> DATA_CEILING = SynchedEntityData.defineId(ParchedSkeletonRemainsEntity.class, EntityDataSerializers.BOOLEAN);
+    private static final EntityDataAccessor<Float> DATA_PLACED_YAW = SynchedEntityData.defineId(ParchedSkeletonRemainsEntity.class, EntityDataSerializers.FLOAT);
 
     private final AnimatableInstanceCache animatableInstanceCache = GeckoLibUtil.createInstanceCache(this);
 
@@ -41,6 +42,7 @@ public class ParchedSkeletonRemainsEntity extends Entity implements GeoEntity {
     protected void defineSynchedData(SynchedEntityData.Builder builder) {
         builder.define(DATA_VARIANT, 1);
         builder.define(DATA_CEILING, false);
+        builder.define(DATA_PLACED_YAW, 0.0F);
     }
 
     @Override
@@ -69,6 +71,17 @@ public class ParchedSkeletonRemainsEntity extends Entity implements GeoEntity {
             this.setVariant(CEILING_VARIANT);
         }
         this.refreshDimensions();
+    }
+
+    public float getPlacedYaw() {
+        return this.entityData.get(DATA_PLACED_YAW);
+    }
+
+    public void setPlacedYaw(float yaw) {
+        float wrappedYaw = Mth.wrapDegrees(yaw);
+        this.entityData.set(DATA_PLACED_YAW, wrappedYaw);
+        this.setYRot(0.0F);
+        this.yRotO = 0.0F;
     }
 
     private static int clampVariant(int variant) {
@@ -144,7 +157,7 @@ public class ParchedSkeletonRemainsEntity extends Entity implements GeoEntity {
     protected void addAdditionalSaveData(CompoundTag tag) {
         tag.putInt("Variant", this.getVariant());
         tag.putBoolean("Ceiling", this.isCeilingMounted());
-        tag.putFloat("Yaw", Mth.wrapDegrees(this.getYRot()));
+        tag.putFloat("Yaw", this.getPlacedYaw());
     }
 
     @Override
@@ -152,7 +165,7 @@ public class ParchedSkeletonRemainsEntity extends Entity implements GeoEntity {
         this.setVariant(tag.getInt("Variant"));
         this.setCeilingMounted(tag.getBoolean("Ceiling"));
         if (tag.contains("Yaw")) {
-            this.setYRot(tag.getFloat("Yaw"));
+            this.setPlacedYaw(tag.getFloat("Yaw"));
         }
     }
 
