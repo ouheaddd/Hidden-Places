@@ -1,3 +1,44 @@
 {
-  "parent": "hidden_places:block/sleeping_bag"
+  "parent": "hidden_places:block/sleeping_bag",
+  "display": {
+    "thirdperson_righthand": {
+      "rotation": [15, 25, 0],
+      "translation": [0, 3.25, -2],
+      "scale": [0.25, 0.25, 0.25]
+    },
+    "thirdperson_lefthand": {
+      "rotation": [15, 25, 0],
+      "translation": [0, 3.25, -2],
+      "scale": [0.25, 0.25, 0.25]
+    },
+    "firstperson_righthand": {
+      "rotation": [25, 150, -25],
+      "translation": [2.75, 1, 0],
+      "scale": [0.5, 0.5, 0.5]
+    },
+    "firstperson_lefthand": {
+      "rotation": [25, 150, -25],
+      "translation": [2.75, -1, 0],
+      "scale": [0.5, 0.5, 0.5]
+    },
+    "ground": {
+      "translation": [0, 1, 0],
+      "scale": [0.25, 0.25, 0.25]
+    },
+    "gui": {
+      "rotation": [50, 150, -15],
+      "translation": [-2.75, 0, 0],
+      "scale": [0.5, 0.5, 0.5]
+    },
+    "fixed": {
+      "rotation": [-90, 0, 0],
+      "translation": [0, -3.75, -2.5],
+      "scale": [0.5, 0.5, 0.5]
+    },
+    "on_shelf": {
+      "rotation": [90, -180, 0],
+      "translation": [0, 0, 1.5],
+      "scale": [0.75, 0.75, 0.75]
+    }
+  }
 }
