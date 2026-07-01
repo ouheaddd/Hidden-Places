@@ -6,8 +6,8 @@
     128
   ],
   "textures": {
-    "0": "block/wildroot_chest",
-    "particle": "block/wildroot_chest"
+    "0": "hidden_places:block/wildroot_chest",
+    "particle": "hidden_places:block/wildroot_chest"
   },
   "elements": [
     {

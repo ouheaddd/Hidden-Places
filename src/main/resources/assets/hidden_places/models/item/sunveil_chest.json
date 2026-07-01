@@ -6,8 +6,8 @@
     128
   ],
   "textures": {
-    "0": "block/sunveil_chest",
-    "particle": "block/sunveil_chest"
+    "0": "hidden_places:block/sunveil_chest",
+    "particle": "hidden_places:block/sunveil_chest"
   },
   "elements": [
     {

@@ -6,8 +6,8 @@
     128
   ],
   "textures": {
-    "0": "block/frostbound_chest",
-    "particle": "block/frostbound_chest"
+    "0": "hidden_places:block/frostbound_chest",
+    "particle": "hidden_places:block/frostbound_chest"
   },
   "elements": [
     {
