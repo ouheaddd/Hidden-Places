@@ -154,5 +154,6 @@
   "message.hidden_places.sleeping_bag.occupied": "This sleeping bag is already occupied.",
   "message.hidden_places.sleeping_bag.resting_until_night": "You rest until nightfall.",
   "message.hidden_places.sleeping_bag.sleeping_until_morning": "You sleep until morning.",
-  "message.hidden_places.sleeping_bag.night_only": "You can only sleep in this sleeping bag at night."
+  "message.hidden_places.sleeping_bag.night_only": "You can only sleep in this sleeping bag at night.",
+  "item.hidden_places.frostbound_cleaver": "Frostbound Cleaver"
 }

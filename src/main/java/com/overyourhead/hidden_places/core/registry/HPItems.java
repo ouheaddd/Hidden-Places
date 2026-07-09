@@ -1,6 +1,7 @@
 package com.overyourhead.hidden_places.core.registry;
 
 import com.overyourhead.hidden_places.HiddenPlacesMod;
+import com.overyourhead.hidden_places.common.item.FrostboundCleaverItem;
 import com.overyourhead.hidden_places.common.item.JungleMosaicPlacerItem;
 import com.overyourhead.hidden_places.common.item.JunglePathTrialPlacerItem;
 import com.overyourhead.hidden_places.common.item.JungleTrialRoomPlacerItem;
@@ -39,6 +40,13 @@ public final class HPItems {
 
     public static final DeferredItem<Item> FROSTBOUND_MAP_FRAGMENT =
             registerSimpleItem("frostbound_map_fragment");
+
+    public static final DeferredItem<FrostboundCleaverItem> FROSTBOUND_CLEAVER =
+            registerItem("frostbound_cleaver", () -> new FrostboundCleaverItem(
+                    new Item.Properties()
+                            .stacksTo(1)
+                            .durability(768)
+            ));
 
     public static final DeferredItem<Item> SUNVEIL_MAP_FRAGMENT =
             registerSimpleItem("sunveil_map_fragment");
